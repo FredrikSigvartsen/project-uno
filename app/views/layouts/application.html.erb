@@ -29,8 +29,11 @@
                     	<li>
                         <%= link_to "New Game", games_newgame_path %>
                     	</li>
+                    	<li>
+                    	<%= link_to "Profile", games_newgame_path %>
+                    	</li>
                     	<li> 
-                    		<%= link_to "logout", destroy_user_session_path, method: :delete, confirm: "Are you sure?" %>
+                    		<%= link_to "Logout", destroy_user_session_path, method: :delete, confirm: "Are you sure?" %>
                     	</li>
                     <% else %>
                     <li>
@@ -40,6 +43,9 @@
                     	<%= link_to "Sign Up", new_user_registration_path %>
                     </li>
                     <% end %>
+                    <li>
+                    	<%= link_to "Rules", games_newgame_path %>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

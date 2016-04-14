@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-
   get 'games/newgame'
 
   get 'games/index'
-
-  get 'games/show'
 
   root 'games#index'
   resources :games
