@@ -6,5 +6,9 @@ one:
 
 two:
   user_id: 1
+  game_id: 2
+
+tre:
+  user_id: 2 
   game_id: 1
-  
+
