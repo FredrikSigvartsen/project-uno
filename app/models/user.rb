@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  # Has attributes: :id, :email, :encrypted_password, :avatar, :current_sign_in_ip, :sign_in_count, 
+  # Attributes: :id, :email, :encrypted_password, :avatar, :current_sign_in_ip, :sign_in_count, 
   # * :reset_password_token
   # Timestamps attributes: :created_at, :last_sign_in, :updated_at, :current_sign_in, :remember_created_at
   # *:reset_password_sent_at
