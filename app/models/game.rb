@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
   validates :id, presence: true, uniqueness: true
   validates :host_id, presence: true
 
-  has_many()
+  #has_many
     def to_s
       "Game ID: #{id}, Host ID: #{host_id}\nDescription: #{description}"
     end
