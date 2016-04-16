@@ -14,36 +14,42 @@
 ActiveRecord::Schema.define(version: 20160413172430) do
 
   create_table "cards", force: :cascade do |t|
-    t.integer "value", limit: 4
-    t.string  "color", limit: 255
+    t.integer "value", limit: 4, null: false
+    t.string  "color", limit: 6
   end
 
-  create_table "chats", force: :cascade do |t|
-    t.integer "message_id", limit: 4
-    t.string  "game_id",    limit: 255
+  create_table "chats", id: false, force: :cascade do |t|
+    t.integer "message_id", limit: 4, null: false
+    t.integer "game_id",    limit: 4, null: false
   end
 
-  create_table "game_tables", force: :cascade do |t|
-    t.integer "game_id",      limit: 4
-    t.integer "card_id",      limit: 4
+  add_index "chats", ["game_id"], name: "game_id", using: :btree
+
+  create_table "game_tables", id: false, force: :cascade do |t|
+    t.integer "game_id",      limit: 4, null: false
+    t.integer "card_id",      limit: 4, null: false
     t.integer "user_id",      limit: 4
-    t.integer "card_in_deck", limit: 4
-    t.integer "card_played",  limit: 4
+    t.integer "card_in_deck", limit: 4, null: false
+    t.integer "card_played",  limit: 4, null: false
   end
 
-  create_table "game_users", force: :cascade do |t|
-    t.integer "user_id", limit: 4
-    t.integer "game_id", limit: 4
+  add_index "game_tables", ["card_id"], name: "card_id", using: :btree
+
+  create_table "game_users", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4, null: false
+    t.integer "game_id", limit: 4, null: false
   end
+
+  add_index "game_users", ["game_id"], name: "game_id", using: :btree
 
   create_table "games", force: :cascade do |t|
-    t.integer "host_id",     limit: 4
+    t.integer "host_id",     limit: 4,   null: false
     t.string  "description", limit: 255
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "user_id", limit: 4
-    t.text     "message", limit: 65535
+    t.integer  "user_id", limit: 4,   null: false
+    t.string   "message", limit: 512
     t.datetime "time"
   end
 
@@ -60,7 +66,7 @@ ActiveRecord::Schema.define(version: 20160413172430) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "avatar",                 limit: 255
+    t.string   "avatar",                 limit: 60
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
