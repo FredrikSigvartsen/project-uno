@@ -4,8 +4,10 @@ class CreateGameTables < ActiveRecord::Migration
       t.integer :game_id
       t.integer :card_id
       t.integer :user_id
-      t.integer :card_in_deck
-      t.integer :card_played
+      t.boolean :card_in_deck
+      t.boolean :card_played
+
+      t.timestamps null: false
     end
   end
 end

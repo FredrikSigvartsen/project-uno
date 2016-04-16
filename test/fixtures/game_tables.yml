@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_id: 1
+  card_id: 1
+  user_id: 1
+  card_in_deck: false
+  card_played: false
+
+two:
+  game_id: 1
+  card_id: 1
+  user_id: 1
+  card_in_deck: false
+  card_played: false

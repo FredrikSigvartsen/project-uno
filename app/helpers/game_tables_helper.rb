@@ -1,0 +1,2 @@
+module GameTablesHelper
+end

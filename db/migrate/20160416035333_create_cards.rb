@@ -3,6 +3,8 @@ class CreateCards < ActiveRecord::Migration
     create_table :cards do |t|
       t.integer :value
       t.string :color
+
+      t.timestamps null: false
     end
   end
 end
