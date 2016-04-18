@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   validates :id, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
+  has_many :game_users
+  has_many :games, through: :game_users
+  
+
   def to_s
     "User ID: #{id}, Email: #{email}, Last signed in: #{last_sign_in_at.nil? ? "never signed in" : last_sign_in_at}"
   end
