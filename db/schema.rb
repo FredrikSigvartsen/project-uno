@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418025350) do
+ActiveRecord::Schema.define(version: 20160420193714) do
 
   create_table "cards", force: :cascade do |t|
     t.integer  "value",      limit: 4
@@ -35,13 +35,6 @@ ActiveRecord::Schema.define(version: 20160418025350) do
     t.boolean  "card_played"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-  end
-
-  create_table "game_users", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "game_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   create_table "games", force: :cascade do |t|
