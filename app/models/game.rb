@@ -1,7 +1,6 @@
 class Game < ActiveRecord::Base
   # Attributes: :id, :host_id, :description, :updated_at, :created_at
   #has_many :users
-  validates :id, presence: true, uniqueness: true
   validates :host_id, presence: true
 
   # Association

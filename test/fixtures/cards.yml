@@ -1,9 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  value: 1
-  color: MyString
+card5:
+  id: 1
+  value: 5
+  color: blue
 
-two:
-  value: 1
-  color: MyString
+card3:
+  id: 2
+  value: 3
+  color: red
+
+wild:
+  id: 3
+  value: 0
+  color: wild
+
+action:
+  id: 4
+  value: 13
+  color: red

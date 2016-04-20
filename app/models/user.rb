@@ -7,11 +7,8 @@ class User < ActiveRecord::Base
   # * :reset_password_token
   # Timestamps attributes: :created_at, :last_sign_in, :updated_at, :current_sign_in, :remember_created_at
   # *:reset_password_sent_at
-  validates :id, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  has_many :game_users
-  has_many :games, through: :game_users
   
 
   def to_s

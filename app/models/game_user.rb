@@ -4,7 +4,7 @@ class GameUser < ActiveRecord::Base
   validates :game_id, presence: true
   # Association
   belongs_to :games
-  belongs_to :users
+  has_one :users
 
 
 end

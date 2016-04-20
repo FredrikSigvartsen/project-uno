@@ -1,11 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   user_id: 1
-  message: MyText
+  message: Hey what's up?
   time: 2016-04-15 20:52:58
 
 two:
+  id: 2
+  user_id: 2
+  message: Not much man
+  time: 2016-04-15 20:53:58
+
+three:
+  id: 3
   user_id: 1
-  message: MyText
-  time: 2016-04-15 20:52:58
+  message: Cool
+  time: 2016-04-15 20:55:58
