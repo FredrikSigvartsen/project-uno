@@ -3,10 +3,10 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def test_user
-    fredrik = User.find(1)
-    #fredrik.email = "feil@email.com"
-    puts fredrik.to_s
-    assert fredrik.save
-    assert fredrik.destroy
+    User.find_each do |user|
+      puts user.to_s
+      assert user.save
+      assert user.destroy
+    end
   end
 end

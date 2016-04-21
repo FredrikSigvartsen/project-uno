@@ -6,11 +6,13 @@
 #
 fredrik:
   id: 1
+  username: uno-legend3000
   email: fredrik.sigvartsen@gmail.com
   encrypted_password: password
   
 jens:
   id: 2
+  username: jensIsjens
   email: jens.omfjord@gmail.com
   encrypted_password: password
 
