@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160421030927) do
+=======
+ActiveRecord::Schema.define(version: 20160423002917) do
+>>>>>>> 89cb275983c9791ea1e8eaa3d668c0a430343e45
 
   create_table "cards", force: :cascade do |t|
     t.integer  "value",      limit: 4
@@ -22,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160421030927) do
 
   create_table "chats", force: :cascade do |t|
     t.integer  "game_id",    limit: 4
-    t.integer  "message_id", limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -51,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160421030927) do
     t.datetime "time"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "chat_id",    limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,5 +76,6 @@ ActiveRecord::Schema.define(version: 20160421030927) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end
