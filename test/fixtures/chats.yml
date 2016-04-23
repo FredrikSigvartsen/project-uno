@@ -3,14 +3,4 @@
 one:
   id: 1
   game_id: 1
-  message_id: 1
 
-two:
-  id: 2
-  game_id: 1
-  message_id: 2
-
-three:
-  id: 3
-  game_id: 1
-  message_id: 3

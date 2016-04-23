@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Timestamps attributes: :created_at, :last_sign_in, :updated_at, :current_sign_in, :remember_created_at
   # *:reset_password_sent_at
   validates :email, presence: true, uniqueness: true
-
+  has_many :messages
   
 
   def to_s

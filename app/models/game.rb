@@ -4,11 +4,11 @@ class Game < ActiveRecord::Base
   validates :host_id, presence: true
 
   # Association
-  has_many :game_tables
+  has_one :game_tables
+  has_one :chats
   has_many :game_users
   has_many :users, through: :game_users
   has_many :cards, through: :game_tables
-  has_one :chats
 
     def to_s
       "Game ID: #{id}, Host ID: #{host_id}\nDescription: #{description}"
