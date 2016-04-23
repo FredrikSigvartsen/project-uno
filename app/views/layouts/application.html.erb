@@ -26,25 +26,25 @@
                 <ul class="nav navbar-nav">
                     
                     <%- if current_user %>
-                    	<li>
+                        <li>
                         <%= link_to "New Game", games_newgame_path %>
-                    	</li>
-                    	<li>
-                    	<%= link_to "Profile", games_newgame_path %>
-                    	</li>
-                    	<li> 
-                    		<%= link_to "Logout", destroy_user_session_path, method: :delete, confirm: "Are you sure?" %>
-                    	</li>
+                        </li>
+                        <li>
+                        <%= link_to "Profile", games_newgame_path %>
+                        </li>
+                        <li> 
+                            <%= link_to "Logout", destroy_user_session_path, method: :delete, confirm: "Are you sure?" %>
+                        </li>
                     <% else %>
                     <li>
-                    	<%= link_to "Login", new_user_session_path %>
+                        <%= link_to "Login", new_user_session_path %>
                     </li>
                     <li>
-                    	<%= link_to "Sign Up", new_user_registration_path %>
+                        <%= link_to "Sign Up", new_user_registration_path %>
                     </li>
                     <% end %>
                     <li>
-                    	<%= link_to "Rules", games_newgame_path %>
+                        <%= link_to "Rules", games_newgame_path %>
                     </li>
                 </ul>
             </div>
@@ -54,16 +54,16 @@
     </nav>
     <!-- Page Content -->
     <div class="container">
-    	<div class="row">
-    		<div class="col-lg-12 text-center">
+        <div class="row">
+            <div class="col-lg-12 text-center">
 
-    			<% flash.each do |a, b| %>
-    				<div class="alert alert-success"> <%= b %> </div>
-    				<%end%>
-    			<%= yield%>
-    		</div>
-    	</div>
-    	<!-- /.row -->
+                <% flash.each do |a, b| %>
+                    <div class="alert alert-success"> <%= b %> </div>
+                    <%end%>
+                <%= yield%>
+            </div>
+        </div>
+        <!-- /.row -->
     </div>
     <!-- /.container -->
    <style>body{padding-top:70px;}</style>
