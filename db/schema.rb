@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160421030927) do
-=======
-ActiveRecord::Schema.define(version: 20160423002917) do
->>>>>>> 89cb275983c9791ea1e8eaa3d668c0a430343e45
 
   create_table "cards", force: :cascade do |t|
     t.integer  "value",      limit: 4
