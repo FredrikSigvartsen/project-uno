@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'games/newgame'
 
+  get 'games/rules'
+
   root 'games#index'
 
   post 'login' => 'messages#login'

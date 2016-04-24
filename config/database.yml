@@ -8,14 +8,14 @@ default: &default
 
 development:
   <<: *default
-  database: project-uno_development
+  database: uno_development
 
 test:
   <<: *default
-  database: project-uno_test
+  database: uno_test
 
 production:
   <<: *default
-  database: project-uno_production
+  database: uno
   username: project-uno
   password: <%= ENV['PROJECT-UNO_DATABASE_PASSWORD'] %>
