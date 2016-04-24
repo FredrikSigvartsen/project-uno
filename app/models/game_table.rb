@@ -2,7 +2,7 @@ class GameTable < ActiveRecord::Base
   # Attributes: :id, :game_id, :card_id, :user_id, :card_in_deck
   # * :card_played, :created_at, :updated_at
   validates :game_id, presence: true
-  validates :card_id, presence: true
+  #validates :card_id, presence: true
   after_initialize :default_values
   #Association
   belongs_to :games
@@ -10,7 +10,7 @@ class GameTable < ActiveRecord::Base
 
   def default_values
     card_id = nil
-    card_in_deck = false;
+    card_in_deck = true;
     card_played = false;
   end
 
@@ -25,5 +25,6 @@ class GameTable < ActiveRecord::Base
     end
     "Game: #{game_id}, Card: #{card_id}, Where is the card: #{place}"
   end
+
 
 end
