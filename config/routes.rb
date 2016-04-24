@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
+  get 'messages/index'
+
+  get 'game_tables/index'
+
+  get 'game/index'
+
   get 'games/newgame'
 
-  get 'games/index'
+  get 'games/rules'
 
   root 'games#index'
+
+  post 'login' => 'messages#login'
+  get 'messages/welcome'
+
   resources :games
+  resources :messages
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

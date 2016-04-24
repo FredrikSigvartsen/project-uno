@@ -1,0 +1,25 @@
+<div class="chat">
+  <div class="chat-title">
+    <h2>Chat</h2>
+    <figure class="avatar">
+      <img src="https://s-media-cache-ak0.pinimg.com/236x/3b/57/0c/3b570c039bfc8640276ede7e3f5d778c.jpg" /></figure>
+  </div>
+  <div class="messages">
+    <div class="messages-content">
+    	<% @messages.each do |message| %>
+			<li>
+			  <%= message.message %>
+			</li>
+		<% end %>
+    </div>
+  </div>
+
+  <div class="message-box">
+    <%= form_for @new_message do |f| %>
+			<%= f.text_field :message %>
+			<%= f.submit "Send" %>
+	    <% end %>
+  </div>
+
+</div>
+<div class="bg"></div>
