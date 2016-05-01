@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
+  adapter: pg
   database: uno
   username: project-uno
   password: <%= ENV['PROJECT-UNO_DATABASE_PASSWORD'] %>
