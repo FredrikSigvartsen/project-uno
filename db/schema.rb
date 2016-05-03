@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421030927) do
+ActiveRecord::Schema.define(version: 20160503023626) do
 
   create_table "cards", force: :cascade do |t|
     t.integer  "value",      limit: 4
     t.string   "color",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "url",        limit: 255
   end
 
   create_table "chats", force: :cascade do |t|
