@@ -18,6 +18,6 @@
   });
 
   channel.bind('new_message', function (data) {
-    $('.messages').prepend('<li>' + data.message + '</li>');
+    $('.messages').append('<li>' + data.message + '</li>');
   });
 }(jQuery));
