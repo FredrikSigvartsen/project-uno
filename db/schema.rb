@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160503023626) do
 
   create_table "chats", force: :cascade do |t|
     t.integer  "game_id",    limit: 4
+    t.integer  "message_id", limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -37,13 +38,6 @@ ActiveRecord::Schema.define(version: 20160503023626) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "game_users", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "game_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   create_table "games", force: :cascade do |t|
     t.integer  "host_id",     limit: 4
     t.string   "description", limit: 255
@@ -53,12 +47,10 @@ ActiveRecord::Schema.define(version: 20160503023626) do
 
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.string   "username",   limit: 255
     t.text     "message",    limit: 65535
     t.datetime "time"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.integer  "chat_id",    limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,12 +66,9 @@ ActiveRecord::Schema.define(version: 20160503023626) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "avatar",                 limit: 255
-    t.string   "username",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end

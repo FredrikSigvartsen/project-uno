@@ -1,16 +1,18 @@
 class MessagesController < ApplicationController
-	def login
-   	 	session[:username] = params[:username]
-    	redirect_to messages_url
- 	end
 
- 	def index
- 		@messages = Message.all
-    	@new_message = Message.new(username: session[:username])
- 	end
+  def index
+    @message = Message.new
+  end
 
- 	def create
-    @message = Message.create(message: params[:message][:message], username: session[:username])
-    redirect_to messages_url
-    end
+  def create
+    @message = Message.new(params[:message])
+
+    Pusher.trigger('chat', 'new_message', {
+      message: @message.message
+    }, {
+      socket_id: params[:socket_id]
+    })
+
+    respond_to :js
+  end
 end

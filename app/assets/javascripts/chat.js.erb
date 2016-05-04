@@ -1,0 +1,23 @@
+;(function ($) {
+
+  <% unless Rails.env.production? %>
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+  <% end %>
+
+  var pusher = new Pusher('0d846fc26187e9741029');
+  var channel = pusher.subscribe('chat');
+
+  pusher.connection.bind('connected', function () {
+    var socket_id = pusher.connection.socket_id;
+
+    $('#socket_id').val(socket_id);
+  });
+
+  channel.bind('new_message', function (data) {
+    $('.messages').prepend('<li>' + data.message + '</li>');
+  });
+}(jQuery));

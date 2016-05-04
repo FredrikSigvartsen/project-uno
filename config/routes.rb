@@ -13,9 +13,9 @@ Rails.application.routes.draw do
 
   post 'login' => 'messages#login'
   get 'messages/welcome'
-
+  
+  resources :messages, only: [:create]
   resources :games
-  resources :messages
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
