@@ -1,1 +1,4 @@
-<li><%= message.message %></li>
+<div style="display:none">
+	<%= t = Time.now()%>
+</div>
+<li><%= t.strftime("%H:%M:%S")%>_me: <%= message.message %></li>

@@ -7,10 +7,15 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(params[:message])
+    t = Time.now()
+    email = current_user[:email]
+    emailusername = email[/[^@]+/]
+
 
     Pusher.trigger('chat', 'new_message', {
-      name: current_user[:email],
-      message: @message.message
+      timestamp:t.strftime("%H:%M:%S"),
+      name: emailusername,
+      message: @message.message, 
     }, {
       socket_id: params[:socket_id]
     })
@@ -18,7 +23,3 @@ class MessagesController < ApplicationController
     respond_to :js
   end
 end
-
-# message = params[:message].merge(user: user)
-#     Pusher.trigger("gameroom-#{params[:id]}", 'chat', message)
-#     head 200, content_type: "text/html"
