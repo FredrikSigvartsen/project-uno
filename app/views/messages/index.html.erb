@@ -28,6 +28,12 @@
         </div>
         </div>
       <% end %>
+      <script>
+      $(document).ready(function(){
+      $('.messages').animate({
+        scrollTop: $('.messages')[0].scrollHeight}, 2000);
+      });
+      </script>
     </div>
   </body>
 </html>
