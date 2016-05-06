@@ -1,25 +1,39 @@
-<div class="chat">
-  <div class="chat-title">
-    <h2>Chat</h2>
-    <figure class="avatar">
-      <img src="https://s-media-cache-ak0.pinimg.com/236x/3b/57/0c/3b570c039bfc8640276ede7e3f5d778c.jpg" /></figure>
-  </div>
-  <div class="messages">
-    <div class="messages-content">
-    	<% @messages.each do |message| %>
-			<li>
-			  <%= message.message %>
-			</li>
-		<% end %>
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Uno</title>
+  </head>
+  <body>
+    <div class="chat">
+      <div class="chat-title">
+        <h2>Chat</h2>
+        <figure class="avatar">
+          <img src="https://s-media-cache-ak0.pinimg.com/236x/3b/57/0c/3b570c039bfc8640276ede7e3f5d778c.jpg" /></figure>
+      </div>
+      <div class="messages">
+        <div class="message-content"> 
+        </div>
+      </div>
+      <%= form_for @message, remote: true do |f| %>
+        <div style="display:none">
+          <%= hidden_field_tag :socket_id %>
+        </div>
+        <div class="message-box">
+          <div class="message-input"> 
+          <%= f.text_area :message, rows: 1, cols: 32 %>
+          </div>
+        <div class="message-submit">
+          <%= f.submit 'Send' %>
+        </div>
+        </div>
+      <% end %>
+      <script>
+      $(document).ready(function(){
+      $('.messages').animate({
+        scrollTop: $('.messages')[0].scrollHeight}, 2000);
+      });
+      </script>
     </div>
-  </div>
-
-  <div class="message-box">
-    <%= form_for @new_message do |f| %>
-			<%= f.text_field :message %>
-			<%= f.submit "Send" %>
-	    <% end %>
-  </div>
-
-</div>
-<div class="bg"></div>
+  </body>
+</html>
