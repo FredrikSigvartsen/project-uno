@@ -4,13 +4,19 @@ one:
   game_id: 1
   card_id: 1
   user_id: 1
+  card_in_deck: false
+  card_played: false
 
 two:
   game_id: 1
   card_id: 2
   card_in_deck: true
+  user_id: 0
+  card_played: false
 
 three: 
   game_id: 1
   card_id: 3
   user_id: 2
+  card_in_deck: false
+  card_played: false

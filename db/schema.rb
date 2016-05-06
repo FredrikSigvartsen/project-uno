@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421030927) do
+ActiveRecord::Schema.define(version: 20160502011939) do
 
   create_table "cards", force: :cascade do |t|
     t.integer  "value",      limit: 4
@@ -36,23 +36,15 @@ ActiveRecord::Schema.define(version: 20160421030927) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "game_users", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "game_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   create_table "games", force: :cascade do |t|
     t.integer  "host_id",     limit: 4
-    t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "description", limit: 255
   end
 
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.string   "username",   limit: 255
     t.text     "message",    limit: 65535
     t.datetime "time"
     t.datetime "created_at",               null: false
@@ -75,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160421030927) do
     t.datetime "updated_at",                                      null: false
     t.string   "avatar",                 limit: 255
     t.string   "username",               limit: 255
+    t.integer  "game_id",                limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -6,17 +6,36 @@ class GameTable < ActiveRecord::Base
   after_initialize :default_values
   #Association
   belongs_to :games
-  has_one :cards
+  has_one :card
 
   def default_values
-    card_id = nil
-    card_in_deck = true;
-    card_played = false;
+    cards = Card.find(card_id)
+    card_in_deck = true
+    card_played = false
+    user_id = 0
+  end
+
+  def assign_to_user(user_id_assigned)
+    user_id = user_id_assigned
+    card_in_deck = false
+    card_played = false
+  end
+
+  def assign_to_deck
+    card_in_deck = true
+    user_id = 0
+    card_played = false
+  end
+
+  def assign_to_played_card
+    card_played = true
+    user_id = 0
+    card_in_deck = false
   end
 
   def to_s #For testing purposes
     place = "something is wrong"
-    if(!(user_id.nil?))
+    if( !(user_id.nil?) && user_id != 0)
       place = "User #{user_id} has it"
     elsif( card_in_deck)
       place = "Card in deck"
@@ -25,6 +44,6 @@ class GameTable < ActiveRecord::Base
     end
     "Game: #{game_id}, Card: #{card_id}, Where is the card: #{place}"
   end
-
-
 end
+
+# Status
