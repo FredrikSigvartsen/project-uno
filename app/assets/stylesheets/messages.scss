@@ -2,10 +2,7 @@
 Mixins
 --------------------*/
 @mixin center {
-  position: absolute;
-  top: 250px;
-  left: 90%;
-  transform: translate(-50%, -50%);
+  
 }
 
 @mixin ball {
