@@ -4,16 +4,19 @@ class GameTest < ActiveSupport::TestCase
 
   def test_game
     game1 = Game.find(1)
-    puts game1.to_s
-    puts game1.game_tables
-    puts game1.users
-    game1.send( :initialize )
-    gametable = GameTable.find_by game_id: game1.id
-    gametable.each do |gamet|
-      puts gamet.to_s
+    game1.send( :create )
+    gametable = GameTable.where( game_id: game1.id )
+    #    gametable.each do |gamet| # TODO solve state of object problem
+    #      puts gamet.to_s
+    #    end
+    user = User.find(1)
+    gametables = GameTable.where( game_id: 1 )
+    gametables.each do |gamecard|
+    	card = Card.find(gamecard.card_id)
     end
-    assert game1.save
-    assert game1.destroy
-    
+    puts game1.users 
+    #assert game1.save
+    #assert game1.destroy
+
   end
 end
