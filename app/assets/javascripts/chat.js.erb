@@ -18,7 +18,10 @@
   });
 
   channel.bind('new_message', function (data) {
-    $('.messages').append('<li>' + '<font color="black">'+ data.timestamp +'_'+ data.name + ': ' +'</font>' +data.message + '</li>');
+    $('.messages').append('<div style="clear: left;>'+'<p style="float: left;">'+ 
+      '<img src="https://s-media-cache-ak0.pinimg.com/236x/3b/57/0c/3b570c039bfc8640276ede7e3f5d778c.jpg" alt="avatarMessage" width="13" height="13">'+
+      '<font color="black">' + '(' + data.timestamp +') '+ data.name + ': ' + 
+      '</font>' + data.message + '</p>'+ '</div>');
       $('.messages').animate({ 
         scrollTop: $('.messages')[0].scrollHeight}, 2000);
   });
