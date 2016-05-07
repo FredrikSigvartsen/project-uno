@@ -5,7 +5,6 @@ if (value){
 	// clear message box
 	$('#message_message').val('');
 	// show the message in the messages area
-	$('.messages').append('<%= escape_javascript(render @message) %>');
 	$(document).ready(function(){
 	      $('.messages').animate({
 	        scrollTop: $('.messages')[0].scrollHeight}, 2000);
