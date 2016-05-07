@@ -5,7 +5,12 @@
       <div class="chat-title">
         <h2>Chat</h2>
         <figure class="avatar">
-          <img src="https://s-media-cache-ak0.pinimg.com/236x/3b/57/0c/3b570c039bfc8640276ede7e3f5d778c.jpg"></figure>
+          <% avatar = current_user[:avatar]%>
+          <% if (avatar == nil) %>
+             <%avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"%>
+          <%end%>
+          <img src="<%= avatar%>"> 
+        </figure>
       </div>
       <div class="messages">
         <div class="message-content"> 
@@ -21,18 +26,6 @@
         </div>
         </div>
       <% end %>
-<<<<<<< HEAD
-      <script>
-      $(document).ready(function(){
-      $('.messages').animate({
-        scrollTop: $('.messages')[0].scrollHeight}, 2000);
-      });
-      </script>
     </div> <!-- End of class chat -->
   </div> <!-- End of class .col-md-4 -->
 </div> <!-- End of row -->
-=======
-    </div>
-  </body>
-</html>
->>>>>>> 79431c780d3c271803320eafcf24cb81c709a6ff
