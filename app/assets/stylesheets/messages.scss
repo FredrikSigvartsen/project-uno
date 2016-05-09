@@ -18,7 +18,10 @@ Mixins
   animation: ball .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
 }
 
-
+.game {
+  border-style: solid;
+  border-color: blue;
+}
 /*--------------------
 Body
 --------------------*/

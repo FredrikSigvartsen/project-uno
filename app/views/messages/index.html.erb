@@ -1,6 +1,63 @@
- <div class="row"> 
-  <div class=".col-md-8"> hello</div>
-  <div class=".col-md-4">
+<script>
+var counter = 1;
+function add(){
+  
+  
+
+  var table = document.getElementById("leadertable");
+  var tbody = document.createElement("tbody")
+  var row = document.createElement('tr');
+  var gameid = document.createElement('td');
+  var contentnumber = document.createElement('td');
+  var contentname = document.createElement('td');
+  var host = document.createElement('td');
+  var join = document.createElement('button');
+  gameid.innerHTML = counter++;
+  host.innerHTML = "Jules";
+  contentname.innerHTML = "Please join fast";
+  contentnumber.innerHTML = "1/2";
+  join.innerHTML = "Join";
+  row.appendChild(gameid);
+  row.appendChild(host);
+  row.appendChild(contentname);
+  row.appendChild(contentnumber);
+  row.appendChild(join);
+  tbody.appendChild(row);
+  table.appendChild(tbody);
+}
+
+function refresh(){
+
+}
+
+function hide(){
+  document.getElementById("leadertable").style.visibility = "hidden";
+}
+
+function show(){
+  document.getElementById("leadertable").style.visibility = "visible";
+}
+</script>
+<div class="row"> 
+  <div class="col-md-8">
+    <table class="table table-hover" id="leadertable">
+      <thead>
+        <tr>
+          <th>Game ID</th>
+          <th>Host</th>
+          <th>Description</th>
+          <th>Players</th>
+          <th>Join Game</th>
+        </tr>
+      </thead>
+    </table>
+    <button onclick="add()">Create Game</button>
+    <button onclick="refresh()">Refresh</button>
+    <button onclick="hide()">Hide</button>
+    <button onclick="show()">Show</button>
+
+  </div>
+  <div class="col-md-4">
     <div class="chat">
       <div class="chat-title">
         <h2>Chat</h2>
@@ -21,7 +78,6 @@
         </div>
         </div>
       <% end %>
-<<<<<<< HEAD
       <script>
       $(document).ready(function(){
       $('.messages').animate({
@@ -31,8 +87,3 @@
     </div> <!-- End of class chat -->
   </div> <!-- End of class .col-md-4 -->
 </div> <!-- End of row -->
-=======
-    </div>
-  </body>
-</html>
->>>>>>> 79431c780d3c271803320eafcf24cb81c709a6ff
