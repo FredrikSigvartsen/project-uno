@@ -6,8 +6,6 @@ class Game < ActiveRecord::Base
   # Association
   has_many :game_tables
   has_one :chats
-  #has_many :game_users
-  #has_many :users, through: :game_users
   has_many :users
   has_many :cards, through: :game_tables
 
@@ -37,7 +35,7 @@ class Game < ActiveRecord::Base
       new_deck.push(card)
       gamecard.assign_to_deck
     end
-    new_deck.shuffle
+    new_deck = new_deck.shuffle
     save
     reload
     new_deck
@@ -45,17 +43,30 @@ class Game < ActiveRecord::Base
 
   def deal_cards
     users.each do |user|
-      puts "-------Dealing card to user: #{user.id} #{user.username} ##{user.email}"
+      #puts "-------Dealing card to user: #{user.id} #{user.username} ##{user.email}"
       (0..6).each do |i|   #TODO: Find a way to test with the database
         card = @deck.pop
         gamecard = GameTable.find_by card_id: card.id
-        puts "assigning gamecard: \" #{gamecard} \", To user id: #{user.id}"
+        #puts "assigning gamecard: \" #{gamecard} \", To user id: #{user.id}"
         gamecard.assign_to_user(user.id)
-        gamecard.save
-        gamecard.reload
-        puts "ASSIGNED gamecard to user id: #{user.id}. This is the game card after: #{gamecard}"
+        #puts "ASSIGNED gamecard to user id: #{user.id}. This is the game card after: #{gamecard}\n\n"
       end
     end
+    save
+    reload
+  end
+
+  def init_table_played_cards
+    card = @deck.pop
+    while( action_card?(card) || wild_card?(card))
+      random_index = rand(@deck.length)
+      @deck.insert(random_index, card) # put it back
+      card = @deck.pop 
+    end
+    @table.push( card )
+    set_current_card_and_color(@table.last)
+    gamecard = GameTable.find_by card_id: card.id
+    gamecard.assign_to_played_card
     save
     reload
   end
@@ -71,27 +82,12 @@ class Game < ActiveRecord::Base
 
   def next_turn
     @current_player = next_in_line(@user_turn_queue) # state of user_turn_queue correct? 
+    true
   end
 
   def skip_next_turn
     player_skipped = next_in_line(@user_turn_queue)
     @current_player = next_in_line(@user_turn_queue)
-  end
-
-  def init_table_played_cards
-    card = @deck.pop
-    if( action_card?(card) )
-      @deck.push(card) # put it back
-      init_table_played_cards
-    elsif( wild_card?(card) )
-      @deck.push(card) # put it back
-      init_table_played_cards
-    else
-      @table.push( card )
-      @current_card = @table.last # peek
-    end
-    save
-    reload
   end
 
   def add_player(user) # Validation of user done with device, or do here?
@@ -129,31 +125,48 @@ class Game < ActiveRecord::Base
   def end_game
   end
 
-  def play_card(card, user)
+  def play_card(card, user, next_color = "")
+    puts "your putting #{card} on top of #{@current_card}"
     if ! user.eql? @current_player 
-    # Validate user
       return false
-    elsif ! validate_card(card)# Validate card 
+    elsif ! validate_card(card)
       return false
     end
-    
-    # Do proper action if wild or action
+    if action_card?(card) #Do action card action
+
+     case card.value
+     when 10 # skip
+
+     when 11 # reverse
+
+     when 12 # draw two
+
+     end
+    elsif wild_card?(card)
+
+      case card.value 
+      when 0  # wild card
+
+      when 1 # Draw four
+
+      end
+    end
+    set_current_card_and_color(card, card.color)
+    @table << card 
+    next_turn
+    # Assign card to deck in GameTable
     # One card left?
-    # Add to played_table
-    # Set current card
-    # Set current color
-    # Set current player
   end
 
   def validate_card(card)
-    if card.color.eql? @current_card.color
+    if card.color.eql? @current_color
       return true
-    elsif card.value.eql? @current_card.value 
+    elsif card.value.eql? @current_card.value
       return true
     elsif wild_card?(card)
       return true
-    else#if the last card was wildcard
-
+    elsif @current_color.eql? card.color
+      return true
     end
     false
   end
@@ -164,9 +177,6 @@ class Game < ActiveRecord::Base
     else
       !has_user?(user)
     end
-  end
-
-  def has_user?(user)
     usernames = users.all.map(&:username)
     usernames.include?(user.username)
   end
@@ -179,6 +189,7 @@ class Game < ActiveRecord::Base
     (card.color.eql? "black") && (0..1).cover?(card.value)
   end
 
+
   def is_full?
     !(users.length <= MAX_NUMBER_PLAYERS)
   end
@@ -189,18 +200,23 @@ class Game < ActiveRecord::Base
     el 
   end
 
+  def set_current_card_and_color(card, color = card.color)
+    @current_card = card
+    @current_color = color 
+  end
+
   def to_s
     "Game ID: #{id}, Host ID: #{host_id}\nDescription: #{description}"
   end
 end
-# Check - Initialize a random deck of card
+# On hold, maybe I'm doing it in another way - Initialize a random deck of card
 # Check - Deal 7 cards to all the users.
 # Check - Initialize the table deck, with a random card from the deck. Remember, action/wild card is not allowed
 # Check - add_players and validation of player
 # Check - remove_player
-# play_card(card, user)
-# Need testing - next_turn
-# Need testing - skip_turn
+# Missing functionality - play_card(card, user)
+# Check - next_turn
+# Check - skip_turn
 # reverse_turn
 # draw_four(card, color)
 # wild_draw_two(card)

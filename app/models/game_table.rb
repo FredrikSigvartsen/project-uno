@@ -9,31 +9,30 @@ class GameTable < ActiveRecord::Base
   #has_one :card
 
   def assign_to_user(user_id_assigned)
-    user_id = user_id_assigned
-    card_in_deck = false
-    card_played = false
-    save
-    reload
+    self.user_id = user_id_assigned
+    self.card_in_deck = false
+    self.card_played = false
+    self.save
+    self.reload
   end
 
   def assign_to_deck
-    card_in_deck = true
-    user_id = 0
-    card_played = false
-    save
-    reload
+    self.card_in_deck = true
+    self.user_id = 0
+    self.card_played = false
+    self.save
+    self.reload
   end
 
   def assign_to_played_card
-    card_played = true
-    user_id = 0
-    card_in_deck = false
-    save
-    reload 
+    self.card_played = true
+    self.user_id = 0
+    self.card_in_deck = false
+    self.save
+    self.reload 
   end
 
   def to_s #For testing purposes
-    self.reload
     place = "something is wrong"
     if( !(user_id.nil?) && user_id != 0)
       place = "User #{user_id} has it"

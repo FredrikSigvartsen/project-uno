@@ -79,3 +79,23 @@ card16:
   card_id: 16
   game_id: 1
   card_in_deck: true
+
+card17:
+  card_id: 17
+  game_id: 1
+  card_in_deck: true
+
+card18:
+  card_id: 18
+  game_id: 1
+  card_in_deck: true
+
+card19:
+  card_id: 19
+  game_id: 1
+  card_in_deck: true
+
+card20:
+  card_id: 20
+  game_id: 1
+  card_in_deck: true

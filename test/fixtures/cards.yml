@@ -13,7 +13,7 @@ card3:
 wild:
   id: 3
   value: 0
-  color: wild
+  color: black
 
 action:
   id: 4
@@ -52,7 +52,7 @@ card10:
 
 card11:
   id: 11
-  value: 6
+  value: 9
   color: yellow
 
 card12:
@@ -77,5 +77,25 @@ card15:
 
 card16:
   id: 16
+  value: 10
+  color: blue
+
+card17:
+  id: 17
+  value: 7
+  color: green
+
+card18:
+  id: 18
+  value: 11
+  color: green
+
+card19:
+  id: 19
+  value: 9
+  color: green
+
+card20:
+  id: 20
   value: 10
   color: blue
