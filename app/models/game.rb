@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   # Attributes: :id, :host_id, :description, :updated_at, :created_at
   #has_many :users
-  validates :host_id, presence: true
+  #validates :host_id, presence: true
 
   # Association
   has_many :game_tables
@@ -16,11 +16,13 @@ class Game < ActiveRecord::Base
   attr_reader :current_color
   attr_reader :user_turn_queue
 
-  MAX_NUMBER_PLAYERS = 6
+  MAX_NUMBER_PLAYERS = 4
 
   def create
     @number_players = 0
     @current_player = nil
+    host = User.find(host_id)
+    users << host
     @deck = init_deck #Threat as stack
     @table = Array.new #Threat as stack
     @user_turn_queue = init_turn_queue
@@ -119,6 +121,10 @@ class Game < ActiveRecord::Base
     users.each do |user|
       user.game_id = -1
     end
+  end
+
+  def draw_one_card
+    deck_pop_and_assign_to(@current_player)
   end
 
   def play_card(card, user, next_color = "")
@@ -253,4 +259,5 @@ end
 # Check - reverse_turn
 # Check -  draw_four
 # Check - draw_two(card)
+# draw_card
 # get_cards(user) [all cards] if user validates/ false
