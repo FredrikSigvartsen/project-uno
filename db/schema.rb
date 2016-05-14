@@ -66,10 +66,6 @@ ActiveRecord::Schema.define(version: 20160507211329) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-<<<<<<< HEAD
-=======
-    t.string   "avatar",                 limit: 255
->>>>>>> game_engine
     t.string   "username",               limit: 255
     t.string   "avatar",                 limit: 255
   end
