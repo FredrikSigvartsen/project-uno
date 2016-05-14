@@ -6,7 +6,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(params[:message])
+    @message = Message.new(message_params)
+    @message.save
     if(@message.message != '')
       t = Time.now()
       username = current_user[:username]
@@ -19,5 +20,11 @@ class MessagesController < ApplicationController
       }, { socket_id: params[:socket_id] })
       respond_to :js
     end
+  end
+
+  private
+
+  def message_params
+    params.require(:message).permit(:user_id,:message,)
   end
 end
