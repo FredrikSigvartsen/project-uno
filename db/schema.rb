@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20160514033253) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "game_users", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "game_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.integer  "host_id",     limit: 4
     t.string   "description", limit: 255
