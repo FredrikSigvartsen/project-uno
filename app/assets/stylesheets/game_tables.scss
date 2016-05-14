@@ -1,3 +1,37 @@
 // Place all the styles related to the Game_tables controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#table{
+	position: absolute;
+	width: 1050px;
+	height: 750px;
+}
+
+#uno_button{
+	position: absolute;
+	top: 75%;
+	left: 7%;
+}
+
+#card{
+	width: 10%;
+	height: 10%;
+	margin-top: 3%;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+#card:hover{
+	width: 12%;
+	height: 12%;
+	margin-top: 0%;
+	margin-left: 0%;
+	margin-right: 0%;
+}
+
+#hand{
+	position: absolute;
+	top: 70%;
+	left: 16%;
+}

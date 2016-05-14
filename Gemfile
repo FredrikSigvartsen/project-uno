@@ -5,6 +5,9 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'pusher'
 
+gem 'handlebars'
+gem 'handlebars_assets'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use SCSS for stylesheets
