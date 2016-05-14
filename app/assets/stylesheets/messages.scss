@@ -2,10 +2,7 @@
 Mixins
 --------------------*/
 @mixin center {
-  position: absolute;
-  top: 250px;
-  left: 90%;
-  transform: translate(-50%, -50%);
+  
 }
 
 @mixin ball {
@@ -21,7 +18,10 @@ Mixins
   animation: ball .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
 }
 
-
+.game {
+  border-style: solid;
+  border-color: blue;
+}
 /*--------------------
 Body
 --------------------*/
@@ -127,11 +127,12 @@ Messages
   flex: 1 1 auto;
   color: rgba(255, 255, 255, .5);
   overflow: auto;
+  overflow-x: hidden;
   position: relative;
   width: 100%;
+  word-wrap: break-word; 
   font-size: 12px;
-
-  
+    
   & .messages-content {
     position: absolute;
     top: 0;
@@ -166,32 +167,34 @@ Message Box
   position: relative;
   
   & .message-input {
-    background: none;
-    border: none;
+
     outline: none!important;
-    resize: none;
     color: rgba(0, 0, 0, .7);
     font-size: 11px;
-    height: 17px;
     margin: 0;
     padding-right: 20px;
-    width: 265px;
+    
   }
 
   & .message-submit {
+
     position: absolute;
     z-index: 1;
-    top: 9px;
-    right: 10px;
+    top: 6px;
+    right: 5px;
     color: #000;
-    border: none;
+    border: 2pt ridge lightgrey;
     background: none;
-    font-size: 10px;
+    font-size: 13px;
+    font-family: "Comic Sans MS";
     text-transform: uppercase;
     line-height: 1;
-    padding: 6px 10px; 
-    border-radius: 10px;
+    padding: 1px 1px; 
+    border-radius: 6px;
   }
 }
+
+
+
 
 

@@ -18,7 +18,10 @@
   });
 
   channel.bind('new_message', function (data) {
-    $('.messages').append('<li>' + '<font color="black">'+ data.timestamp +'_'+ data.name + ': ' +'</font>' +data.message + '</li>');
+    $('.messages').append('<div style="clear: left;>'+'<p style="float: left;">'+ 
+      '<img src="'+data.avatar+'" alt="avatarMessage" width="13" height="13">'+
+      '<font color="black">' + '(' + data.timestamp +') '+ data.name + ': ' + 
+      '</font>' + data.message + '</p>'+ '</div>');
       $('.messages').animate({ 
         scrollTop: $('.messages')[0].scrollHeight}, 2000);
   });
