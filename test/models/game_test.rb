@@ -4,6 +4,10 @@ class GameTest < ActiveSupport::TestCase
 
   def test_game
     game1 = Game.find(1)
+    user1 = User.find(1)
+    user2 = User.find(2)
+    game1.send( :add_player, user1)
+    game1.send( :add_player, user2)
     game1.send( :create )
     gametable = GameTable.where( game_id: game1.id )
     wildcard = Card.find(3)
@@ -12,8 +16,6 @@ class GameTest < ActiveSupport::TestCase
     greencard3 = Card.find(6)
     red_draw2 = Card.find(4)
     green_reverse = Card.find(14)
-    user1 = User.find(1)
-    user2 = User.find(2)
 
     gametable.each do |gamet| # TODO solve state of object problem
       puts gamet.to_s

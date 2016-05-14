@@ -87,6 +87,7 @@ class Game < ActiveRecord::Base
 
   def add_player(user) # Validation of user done with device, or do here too?
     if can_accomodate(user)
+      user.game_id = id
       users << user
       save
       reload
@@ -108,15 +109,16 @@ class Game < ActiveRecord::Base
       return user
     else
       users.delete(user)
+      user.game_id = -1
       return user
     end
     false
   end
 
-  def start
-  end
-
   def end_game
+    users.each do |user|
+      user.game_id = -1
+    end
   end
 
   def play_card(card, user, next_color = "")
@@ -200,9 +202,11 @@ class Game < ActiveRecord::Base
   def can_accomodate(user)
     if(!(users.length <= MAX_NUMBER_PLAYERS))
       false
-    else
-      !has_user?(user)
     end
+    !has_user?(user)
+  end
+
+  def has_user? user
     usernames = users.all.map(&:username)
     usernames.include?(user.username)
   end

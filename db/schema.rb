@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507211329) do
+ActiveRecord::Schema.define(version: 20160514033253) do
 
   create_table "cards", force: :cascade do |t|
     t.integer  "value",      limit: 4
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160507211329) do
     t.datetime "updated_at",                                      null: false
     t.string   "username",               limit: 255
     t.string   "avatar",                 limit: 255
+    t.integer  "game_id",                limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
