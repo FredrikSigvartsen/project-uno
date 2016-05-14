@@ -16,8 +16,7 @@ class MessagesController < ApplicationController
         avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"
       end
       Pusher.trigger('chat', 'new_message', { timestamp:t.strftime("%H:%M:%S"),
-        name: username, avatar: avatar, message: @message.message, 
-      }, { socket_id: params[:socket_id] })
+        name: username, avatar: avatar, message: @message.message })
       respond_to :js
     end
   end
@@ -25,6 +24,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:user_id,:message,)
+    params.require(:message).permit(:user_id,:message)
   end
 end
