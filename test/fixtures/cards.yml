@@ -2,8 +2,8 @@
 
 card5:
   id: 1
-  value: 5
-  color: blue
+  value: 1
+  color: black
 
 card3:
   id: 2
@@ -13,9 +13,89 @@ card3:
 wild:
   id: 3
   value: 0
-  color: wild
+  color: black
 
 action:
   id: 4
-  value: 13
+  value: 12
   color: red
+
+card4:
+  id: 5
+  value: 3
+  color: blue
+
+card6:
+  id: 6
+  value: 3
+  color: green
+
+card7:
+  id: 7
+  value: 5
+  color: yellow
+
+card8:
+  id: 8
+  value: 2
+  color: blue
+
+card9:
+  id: 9
+  value: 8
+  color: red
+
+card10:
+  id: 10
+  value: 0
+  color: red
+
+card11:
+  id: 11
+  value: 9
+  color: yellow
+
+card12:
+  id: 12
+  value: 3
+  color: green
+
+card13:
+  id: 13
+  value: 7
+  color: green
+
+card14:
+  id: 14
+  value: 11
+  color: green
+
+card15:
+  id: 15
+  value: 9
+  color: green
+
+card16:
+  id: 16
+  value: 10
+  color: blue
+
+card17:
+  id: 17
+  value: 7
+  color: green
+
+card18:
+  id: 18
+  value: 11
+  color: green
+
+card19:
+  id: 19
+  value: 9
+  color: green
+
+card20:
+  id: 20
+  value: 10
+  color: blue

@@ -1,12 +1,69 @@
- <div class="row"> 
-  <div class=".col-md-8"> hello</div>
-  <div class=".col-md-4">
+<script>
+var counter = 1;
+function add(){
+  
+  
+
+  var table = document.getElementById("leadertable");
+  var tbody = document.createElement("tbody")
+  var row = document.createElement('tr');
+  var gameid = document.createElement('td');
+  var contentnumber = document.createElement('td');
+  var contentname = document.createElement('td');
+  var host = document.createElement('td');
+  var join = document.createElement('button');
+  gameid.innerHTML = counter++;
+  host.innerHTML = "Jules";
+  contentname.innerHTML = "Please join fast";
+  contentnumber.innerHTML = "1/2";
+  join.innerHTML = "Join";
+  row.appendChild(gameid);
+  row.appendChild(host);
+  row.appendChild(contentname);
+  row.appendChild(contentnumber);
+  row.appendChild(join);
+  tbody.appendChild(row);
+  table.appendChild(tbody);
+}
+
+function refresh(){
+
+}
+
+function hide(){
+  document.getElementById("leadertable").style.visibility = "hidden";
+}
+
+function show(){
+  document.getElementById("leadertable").style.visibility = "visible";
+}
+</script>
+<div class="row"> 
+  <div class="col-md-8">
+    <table class="table table-hover" id="leadertable">
+      <thead>
+        <tr>
+          <th>Game ID</th>
+          <th>Host</th>
+          <th>Description</th>
+          <th>Players</th>
+          <th>Join Game</th>
+        </tr>
+      </thead>
+    </table>
+    <button onclick="add()">Create Game</button>
+    <button onclick="refresh()">Refresh</button>
+    <button onclick="hide()">Hide</button>
+    <button onclick="show()">Show</button>
+
+  </div>
+  <div class="col-md-4">
     <div class="chat">
       <div class="chat-title">
         <h2>Chat</h2>
         <figure class="avatar">
           <% avatar = current_user[:avatar]%>
-          <% if (avatar == nil) %>
+          <% if (avatar == nil|| avatar == "") %>
              <%avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"%>
           <%end%>
           <img src="<%= avatar%>"> 
@@ -19,6 +76,7 @@
       <%= form_for @message, remote: true do |f| %>
         <div class="message-box">
           <div class="message-input"> 
+          <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.text_area :message, rows: 2, cols: 30 %>
           </div>
         <div class="message-submit">

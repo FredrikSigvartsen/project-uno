@@ -1,11 +1,9 @@
 class Message < ActiveRecord::Base
-  include ActiveModel::Model
-  attr_accessor :name,:message,:timestamp
 
   # Attributes: :id, :user_id, :chat_id, :message, :time, :created_at, :updated_at
   # validates :user_id, presence: true
   # validates :chat_id, presence: true
-  # validates :message, presence: true
+  # validates :message, presence: true, length: {maximum: 200}
   
   belongs_to :chat
   belongs_to :user

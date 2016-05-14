@@ -119,7 +119,7 @@ Card.create!([{ :id => 1, :value => 0, :color => "red", :url => "../public/image
 			  { :id => 102, :value => 0, :color => "black", :url => "../public/images/cards/card_102.png" },
 			  { :id => 103, :value => 0, :color => "black", :url => "../public/images/cards/card_103.png" },
 			  { :id => 104, :value => 0, :color => "black", :url => "../public/images/cards/card_104.png" },
-			  { :id => 105, :value => 0, :color => "black", :url => "../public/images/cards/card_105.png" },
-			  { :id => 106, :value => 0, :color => "black", :url => "../public/images/cards/card_106.png" },
-			  { :id => 107, :value => 0, :color => "black", :url => "../public/images/cards/card_107.png" },
-			  { :id => 108, :value => 0, :color => "black", :url => "../public/images/cards/card_108.png" },]) 
+			  { :id => 105, :value => 1, :color => "black", :url => "../public/images/cards/card_105.png" },
+			  { :id => 106, :value => 1, :color => "black", :url => "../public/images/cards/card_106.png" },
+			  { :id => 107, :value => 1, :color => "black", :url => "../public/images/cards/card_107.png" },
+			  { :id => 108, :value => 1, :color => "black", :url => "../public/images/cards/card_108.png" },]) 
