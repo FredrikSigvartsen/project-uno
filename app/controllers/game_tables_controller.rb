@@ -1,3 +1,3 @@
-class MessagesController < ApplicationController
+class GameTablesController < ApplicationController
 	
 end

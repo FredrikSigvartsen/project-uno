@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     if @game.save
-      redirect_to messages_index_path
+      redirect_to game_tables_index_path
     else
       render 'new'
     end
