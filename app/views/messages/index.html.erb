@@ -63,7 +63,7 @@ function show(){
         <h2>Chat</h2>
         <figure class="avatar">
           <% avatar = current_user[:avatar]%>
-          <% if (avatar == nil) %>
+          <% if (avatar == nil|| avatar == "") %>
              <%avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"%>
           <%end%>
           <img src="<%= avatar%>"> 

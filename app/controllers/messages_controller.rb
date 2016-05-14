@@ -2,7 +2,6 @@ class MessagesController < ApplicationController
 
   def index
     @message = Message.new
-    @user = User.new
   end
 
   def create
@@ -12,7 +11,7 @@ class MessagesController < ApplicationController
       t = Time.now()
       username = current_user[:username]
       avatar = current_user[:avatar]
-      if (avatar == nil) 
+      if (avatar == nil || avatar == "") 
         avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"
       end
       Pusher.trigger('chat', 'new_message', { timestamp:t.strftime("%H:%M:%S"),
