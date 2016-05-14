@@ -11,9 +11,9 @@ class Game < ActiveRecord::Base
 
   attr_reader :deck
   attr_reader :table
-  attr_reader :current_card 
+  attr_reader :current_card
   attr_reader :current_player
-  attr_reader :current_color 
+  attr_reader :current_color
   attr_reader :user_turn_queue
 
   MAX_NUMBER_PLAYERS = 6
@@ -59,7 +59,7 @@ class Game < ActiveRecord::Base
     while( action_card?(card) || wild_card?(card))
       random_index = rand(@deck.length)
       @deck.insert(random_index, card) # put it back
-      card = @deck.pop 
+      card = @deck.pop
     end
     @table.push( card )
     set_current_card_and_color(@table.last)
@@ -123,25 +123,25 @@ class Game < ActiveRecord::Base
 
   def play_card(card, user, next_color = "")
     puts "your putting #{card} on top of color: #{@current_color} card: #{@current_card}"
-    if ! user.eql? @current_player 
+    if ! user.eql? @current_player
       return false
     elsif ! validate_card(card)
       return false
     end
 
     color = card.color
-    if action_card?(card) 
-     case card.value
-     when 10 
-      skip_next_turn
-     when 11 
-      reverse_queue
-     when 12 
-      draw_two
-     end
-     next_turn
+    if action_card?(card)
+      case card.value
+      when 10
+        skip_next_turn
+      when 11
+        reverse_queue
+      when 12
+        draw_two
+      end
+      next_turn
     elsif wild_card?(card)
-      case card.value 
+      case card.value
       when 0  # wild card
         next_turn
       when 1
@@ -152,7 +152,7 @@ class Game < ActiveRecord::Base
       next_turn
     end
     set_current_card_and_color(card, color)
-    @table << card 
+    @table << card
     gamecard = GameTable.find_by card_id: card.id
     gamecard.assign_to_played_card
     save
@@ -230,12 +230,12 @@ class Game < ActiveRecord::Base
   def next_in_line
     el = @user_turn_queue.pop
     @user_turn_queue.unshift(el)
-    el 
+    el
   end
 
   def set_current_card_and_color(card, color = card.color)
     @current_card = card
-    @current_color = color 
+    @current_color = color
   end
 
   def to_s
