@@ -3,20 +3,99 @@
 one:
   game_id: 1
   card_id: 1
-  user_id: 1
-  card_in_deck: false
-  card_played: false
+  card_in_deck: true
 
 two:
   game_id: 1
   card_id: 2
   card_in_deck: true
-  user_id: 0
-  card_played: false
 
 three: 
   game_id: 1
   card_id: 3
-  user_id: 2
-  card_in_deck: false
-  card_played: false
+  card_in_deck: true
+
+action:
+  card_id: 4
+  game_id: 1
+  card_in_deck: true
+
+game_card4:
+  card_id: 5
+  game_id: 1
+  card_in_deck: true
+
+game_card5:
+  card_id: 6
+  game_id: 1
+  card_in_deck: true
+
+game_card6:
+  card_id: 7
+  game_id: 1
+  card_in_deck: true
+
+game_card7:
+  card_id: 8
+  game_id: 1
+  card_in_deck: true
+
+game_card8:
+  card_id: 9
+  game_id: 1
+  card_in_deck: true
+
+game_card9:
+  card_id: 10
+  game_id: 1
+  card_in_deck: true
+
+game_card10:
+  card_id: 11
+  game_id: 1
+  card_in_deck: true
+
+game_card11:
+  card_id: 12
+  game_id: 1
+  card_in_deck: true
+
+game_card12:
+  card_id: 13
+  game_id: 1
+  card_in_deck: true
+
+game_card13:
+  card_id: 14
+  game_id: 1
+  card_in_deck: true
+
+card15:
+  card_id: 15
+  game_id: 1
+  card_in_deck: true
+
+card16:
+  card_id: 16
+  game_id: 1
+  card_in_deck: true
+
+card17:
+  card_id: 17
+  game_id: 1
+  card_in_deck: true
+
+card18:
+  card_id: 18
+  game_id: 1
+  card_in_deck: true
+
+card19:
+  card_id: 19
+  game_id: 1
+  card_in_deck: true
+
+card20:
+  card_id: 20
+  game_id: 1
+  card_in_deck: true

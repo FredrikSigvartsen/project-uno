@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20160507211329) do
 
   create_table "chats", force: :cascade do |t|
     t.integer  "game_id",    limit: 4
-    t.integer  "message_id", limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160507211329) do
     t.datetime "time"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "chat_id",    limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,11 +66,16 @@ ActiveRecord::Schema.define(version: 20160507211329) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+<<<<<<< HEAD
+=======
+    t.string   "avatar",                 limit: 255
+>>>>>>> game_engine
     t.string   "username",               limit: 255
     t.string   "avatar",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end

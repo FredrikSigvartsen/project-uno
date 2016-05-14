@@ -1,36 +1,35 @@
 class GameTable < ActiveRecord::Base
   # Attributes: :id, :game_id, :card_id, :user_id, :card_in_deck
   # * :card_played, :created_at, :updated_at
-  validates :game_id, presence: true
+  #validates :game_id, presence: true
   #validates :card_id, presence: true
-  after_initialize :default_values
+  #after_initialize :default_values
   #Association
   belongs_to :games
-  has_one :card
-
-  def default_values
-    cards = Card.find(card_id)
-    card_in_deck = true
-    card_played = false
-    user_id = 0
-  end
+  #has_one :card
 
   def assign_to_user(user_id_assigned)
-    user_id = user_id_assigned
-    card_in_deck = false
-    card_played = false
+    self.user_id = user_id_assigned
+    self.card_in_deck = false
+    self.card_played = false
+    self.save
+    self.reload
   end
 
   def assign_to_deck
-    card_in_deck = true
-    user_id = 0
-    card_played = false
+    self.card_in_deck = true
+    self.user_id = 0
+    self.card_played = false
+    self.save
+    self.reload
   end
 
   def assign_to_played_card
-    card_played = true
-    user_id = 0
-    card_in_deck = false
+    self.card_played = true
+    self.user_id = 0
+    self.card_in_deck = false
+    self.save
+    self.reload 
   end
 
   def to_s #For testing purposes

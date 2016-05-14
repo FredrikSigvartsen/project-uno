@@ -3,4 +3,7 @@ class Card < ActiveRecord::Base
   validates :value, presence: true
   validates :color, presence: true
 
+  def to_s
+    "Card #{id}, value: #{value}, color: #{color}"
+  end
 end
