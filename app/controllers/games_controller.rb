@@ -8,7 +8,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
+    @game = Game.new
+    @game.host_id = current_user[:id]
+    @game.description = game_params[:description]
+    @game.create
     if @game.save
       redirect_to game_tables_index_path
     else

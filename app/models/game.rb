@@ -21,6 +21,7 @@ class Game < ActiveRecord::Base
   def create
     @number_players = 0
     @current_player = nil
+    init_game_tables
     @deck = init_deck #Threat as stack
     @table = Array.new #Threat as stack
     @user_turn_queue = init_turn_queue
@@ -29,6 +30,17 @@ class Game < ActiveRecord::Base
     init_table_played_cards
     save
     reload
+  end
+
+  def init_game_tables
+    cards = Card.all
+    cards.each do |card|
+      gamecard = GameTable.new
+      gamecard.game_id = id
+      gamecard.card_id = card.id
+      gamecard.assign_to_deck
+      game_tables << gamecard
+    end
   end
 
   def init_deck
