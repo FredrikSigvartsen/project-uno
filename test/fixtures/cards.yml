@@ -2,8 +2,8 @@
 
 card5:
   id: 1
-  value: 5
-  color: blue
+  value: 1
+  color: black
 
 card3:
   id: 2
@@ -17,7 +17,7 @@ wild:
 
 action:
   id: 4
-  value: 13
+  value: 12
   color: red
 
 card4:
@@ -28,7 +28,7 @@ card4:
 card6:
   id: 6
   value: 3
-  color: yellow
+  color: green
 
 card7:
   id: 7

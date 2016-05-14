@@ -11,25 +11,28 @@ class Game < ActiveRecord::Base
 
   attr_reader :deck
   attr_reader :table
-  attr_reader :current_card # Do we need this?
+  attr_reader :current_card 
   attr_reader :current_player
   attr_reader :current_color 
+  attr_reader :user_turn_queue
 
   MAX_NUMBER_PLAYERS = 6
 
   def create
-    puts "------------ Initializing Game #{id} with Host #{host_id} --------------\n"
+    @number_players = 0
+    @current_player = nil
     @deck = init_deck #Threat as stack
     @table = Array.new #Threat as stack
-    @number_players = 0
     @user_turn_queue = init_turn_queue
+    @current_player = next_in_line
     deal_cards
     init_table_played_cards
-    puts "------------ Done Initializing --------------\n"
+    save
+    reload
   end
 
   def init_deck
-    new_deck = Array.new
+    new_deck = Card.all
     game_tables.each do |gamecard|
       card = Card.find(gamecard.card_id)
       new_deck.push(card)
@@ -43,13 +46,8 @@ class Game < ActiveRecord::Base
 
   def deal_cards
     users.each do |user|
-      #puts "-------Dealing card to user: #{user.id} #{user.username} ##{user.email}"
       (0..6).each do |i|   #TODO: Find a way to test with the database
-        card = @deck.pop
-        gamecard = GameTable.find_by card_id: card.id
-        #puts "assigning gamecard: \" #{gamecard} \", To user id: #{user.id}"
-        gamecard.assign_to_user(user.id)
-        #puts "ASSIGNED gamecard to user id: #{user.id}. This is the game card after: #{gamecard}\n\n"
+        deck_pop_and_assign_to(user)
       end
     end
     save
@@ -76,21 +74,18 @@ class Game < ActiveRecord::Base
     users.each do |user|
       queue.push(user)
     end
-    @current_player = next_in_line(queue)
     queue
   end
 
   def next_turn
-    @current_player = next_in_line(@user_turn_queue) # state of user_turn_queue correct? 
-    true
+    @current_player = next_in_line
   end
 
   def skip_next_turn
-    player_skipped = next_in_line(@user_turn_queue)
-    @current_player = next_in_line(@user_turn_queue)
+    player_skipped = next_in_line
   end
 
-  def add_player(user) # Validation of user done with device, or do here?
+  def add_player(user) # Validation of user done with device, or do here too?
     if can_accomodate(user)
       users << user
       save
@@ -119,43 +114,74 @@ class Game < ActiveRecord::Base
   end
 
   def start
-
   end
 
   def end_game
   end
 
   def play_card(card, user, next_color = "")
-    puts "your putting #{card} on top of #{@current_card}"
+    puts "your putting #{card} on top of color: #{@current_color} card: #{@current_card}"
     if ! user.eql? @current_player 
       return false
     elsif ! validate_card(card)
       return false
     end
-    if action_card?(card) #Do action card action
 
+    color = card.color
+    if action_card?(card) 
      case card.value
-     when 10 # skip
-
-     when 11 # reverse
-
-     when 12 # draw two
-
+     when 10 
+      skip_next_turn
+     when 11 
+      reverse_queue
+     when 12 
+      draw_two
      end
+     next_turn
     elsif wild_card?(card)
-
       case card.value 
       when 0  # wild card
-
-      when 1 # Draw four
-
+        next_turn
+      when 1
+        draw_four
       end
+      color = next_color
+    else# Regular card
+      next_turn
     end
-    set_current_card_and_color(card, card.color)
+    set_current_card_and_color(card, color)
     @table << card 
-    next_turn
-    # Assign card to deck in GameTable
+    gamecard = GameTable.find_by card_id: card.id
+    gamecard.assign_to_played_card
+    save
+    reload
+    true
     # One card left?
+  end
+
+  def draw_four#Next player draws four and loses turn
+    (0..3).each do |i|
+      deck_pop_and_assign_to(get_next_player)
+    end
+    skip_next_turn
+  end
+
+  def reverse_queue
+    @user_turn_queue = @user_turn_queue.reverse
+    next_turn
+  end
+
+  def draw_two#Next player draws two, and loses turn
+    (0..1).each do |i|
+      deck_pop_and_assign_to(get_next_player)
+    end
+    skip_next_turn
+  end
+
+  def deck_pop_and_assign_to(user)
+    card = @deck.pop
+    gamecard = GameTable.find_by card_id: card.id
+    gamecard.assign_to_user(user.id)
   end
 
   def validate_card(card)
@@ -189,14 +215,17 @@ class Game < ActiveRecord::Base
     (card.color.eql? "black") && (0..1).cover?(card.value)
   end
 
+  def get_next_player
+    @user_turn_queue[users.length-1]
+  end
 
   def is_full?
     !(users.length <= MAX_NUMBER_PLAYERS)
   end
 
-  def next_in_line(array)
-    el = array.pop
-    array.unshift(el)
+  def next_in_line
+    el = @user_turn_queue.pop
+    @user_turn_queue.unshift(el)
     el 
   end
 
@@ -209,16 +238,15 @@ class Game < ActiveRecord::Base
     "Game ID: #{id}, Host ID: #{host_id}\nDescription: #{description}"
   end
 end
-# On hold, maybe I'm doing it in another way - Initialize a random deck of card
+# Check - Initialize a random deck of card
 # Check - Deal 7 cards to all the users.
 # Check - Initialize the table deck, with a random card from the deck. Remember, action/wild card is not allowed
 # Check - add_players and validation of player
 # Check - remove_player
-# Missing functionality - play_card(card, user)
+# Check - play_card(card, user)
 # Check - next_turn
 # Check - skip_turn
-# reverse_turn
-# draw_four(card, color)
-# wild_draw_two(card)
-# wild(card)
+# Check - reverse_turn
+# Check -  draw_four
+# Check - draw_two(card)
 # get_cards(user) [all cards] if user validates/ false
