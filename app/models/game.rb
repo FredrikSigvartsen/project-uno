@@ -18,7 +18,7 @@ class Game < ActiveRecord::Base
 
   MAX_NUMBER_PLAYERS = 2
 
-  def initialize
+  def start_game
     @number_players = 0
     @current_player = nil
     init_game_tables

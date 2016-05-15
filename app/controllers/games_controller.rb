@@ -27,7 +27,7 @@ class GamesController < ApplicationController
 
   def start
     @game = Game.find(9)
-    @game.initialize
+    @game.start_game
   end
 
   def rules
