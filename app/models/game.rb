@@ -18,17 +18,18 @@ class Game < ActiveRecord::Base
 
   MAX_NUMBER_PLAYERS = 2
 
-  def initialize
+  def start_game
+    @active = false
     @number_players = 0
     @current_player = nil
+    @table = Array.new #Threat as stack
     init_game_tables
     @deck = init_deck #Threat as stack
-    @table = Array.new #Threat as stack
     @user_turn_queue = init_turn_queue
     @current_player = next_in_line
     deal_cards
     init_table_played_cards
-    save
+    @active = save
     reload
   end
 
@@ -60,8 +61,8 @@ class Game < ActiveRecord::Base
     users.each do |user|
       (0..6).each do |i|   #TODO: Find a way to test with the database
         card = deck_pop_and_assign_to(user)
-       Pusher.trigger('game', 'card_drawn', 
-        { card_id: card.id, user_id: user.id })
+        Pusher.trigger("game_#{id}", "card_drawn_by_user_#{user.id}",
+                       { card_id: card.id, user_id: user.id })
       end
     end
     save
@@ -135,6 +136,15 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def draw_card(user)
+    if ! user.eql? @current_player
+      return false
+    end
+    card = deck_pop_and_assign_to(user)
+    Pusher.trigger("game_#{id}", "card_drawn_by_user_#{user.id}",
+                   { card_id: card.id, user_id: user.id })
+  end
+
   def play_card(card, user, next_color = "")
     puts "your putting #{card} on top of color: #{@current_color} card: #{@current_card}"
     if ! user.eql? @current_player
@@ -169,6 +179,8 @@ class Game < ActiveRecord::Base
     @table << card
     gamecard = GameTable.find_by card_id: card.id
     gamecard.assign_to_played_card
+    Pusher.trigger("game_#{id}", "card_played_by_user_#{user.id}",
+                   { card_id: card.id, user_id: user.id })
     save
     reload
     true
@@ -242,6 +254,10 @@ class Game < ActiveRecord::Base
 
   def wild_card?(card)
     (card.color.eql? "black") && (0..1).cover?(card.value)
+  end
+
+  def active?
+    users.length < 1 && @active
   end
 
   def get_next_player
