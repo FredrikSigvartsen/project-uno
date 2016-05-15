@@ -17,14 +17,16 @@ class GamesController < ApplicationController
     end
 
 
-    ready = @game.create
-
-    if @game.save && ready
+    if @game.save
       redirect_to games_index_path
     else
       render 'new'
     end
     flash[:notice] = "There are #{@game.users.length} users in game #{@game.id}"
+  end
+
+  def start
+    created = @game.create
   end
 
   def rules
