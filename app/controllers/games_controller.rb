@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   def index
   end
 
-  def newgame
+  def new
     @game = Game.new
   end
 
@@ -26,7 +26,7 @@ class GamesController < ApplicationController
     flash[:notice] = "There are #{@game.users.length} users in game #{@game.id}"
   end
 
-  def start
+  def update
     @game = Game.find(9)
     @game = @game.start_game
     if @game.save
