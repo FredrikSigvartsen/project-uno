@@ -27,7 +27,7 @@ class GamesController < ApplicationController
       end
     end
     if @game.save
-      redirect_to game_tables_index_path
+      redirect_to games_index_path
     else
       render 'new'
     end
