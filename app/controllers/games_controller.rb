@@ -15,12 +15,11 @@ class GamesController < ApplicationController
     elsif( @game.users.length == 1)
       @game.add_player(current_user)
     end
-    
-    if @game.users.length > 1
-      @game.create
-      #respond_to :js
-    end
-    if @game.save
+
+
+    ready = @game.create
+
+    if @game.save && ready
       redirect_to games_index_path
     else
       render 'new'
