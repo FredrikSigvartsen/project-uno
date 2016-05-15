@@ -60,7 +60,7 @@ class Game < ActiveRecord::Base
     users.each do |user|
       (0..6).each do |i|   #TODO: Find a way to test with the database
         card = deck_pop_and_assign_to(user)
-        Pusher.trigger('game', 'card_drawn', 
+       Pusher.trigger('game', 'card_drawn', 
         { card_id: card.id, user_id: user.id })
       end
     end
