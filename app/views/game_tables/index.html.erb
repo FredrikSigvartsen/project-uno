@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-8">
 		<div id="game_container">
 			<div id="table">
 				<%= image_tag "utils/table.png", :id => "table" %>
@@ -14,7 +14,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-4">
 		<%= ERB.new("../messages/index.html.erb").result(binding) %>
 	</div>
 </div>
