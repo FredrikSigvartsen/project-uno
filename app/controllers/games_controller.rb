@@ -18,7 +18,7 @@ class GamesController < ApplicationController
 
     if @game.save
       redirect_to games_index_path
-      Pusher.trigger("game_#{@game.id}", "new_game",
+      Pusher.trigger("lobby", "new_game",
                      {game_id: @game.id})
     else
       render 'new'
