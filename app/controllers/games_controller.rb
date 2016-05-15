@@ -16,22 +16,16 @@ class GamesController < ApplicationController
       @game.add_player(current_user)
     end
 
-    if @game.users.length > 1
-      @game.create
-      @game.users.each do |user| 
-        @game.get_cards(user).each do |card|
-          puts "Card #{card.id}"
-          Pusher.trigger('game', 'card_drawn', 
-          { card_id: card.id, user_id: user.id })
-        end 
-      end
-    end
     if @game.save
       redirect_to games_index_path
     else
       render 'new'
     end
     flash[:notice] = "There are #{@game.users.length} users in game #{@game.id}"
+  end
+
+  def start
+    created = @game.create
   end
 
   def rules
