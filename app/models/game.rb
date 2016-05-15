@@ -16,7 +16,7 @@ class Game < ActiveRecord::Base
   attr_reader :current_color
   attr_reader :user_turn_queue
 
-  MAX_NUMBER_PLAYERS = 6
+  MAX_NUMBER_PLAYERS = 2
 
   def create
     @number_players = 0
@@ -59,7 +59,9 @@ class Game < ActiveRecord::Base
   def deal_cards
     users.each do |user|
       (0..6).each do |i|   #TODO: Find a way to test with the database
-        deck_pop_and_assign_to(user)
+        card = deck_pop_and_assign_to(user)
+        Pusher.trigger('game', 'card_drawn', 
+          { card_id: card.id, user_id: user.id })
       end
     end
     save
@@ -196,6 +198,7 @@ class Game < ActiveRecord::Base
     card = @deck.pop
     gamecard = GameTable.find_by card_id: card.id
     gamecard.assign_to_user(user.id)
+    card
   end
 
   def validate_card(card)
@@ -209,6 +212,16 @@ class Game < ActiveRecord::Base
       return true
     end
     false
+  end
+
+  def get_cards(user)
+    all_cards = Array.new
+    game_tables.each do |gamecard|
+      if gamecard.user_id.eql? user.id
+        all_cards << Card.find(gamecard.card_id)
+      end
+    end
+    all_cards
   end
 
   def can_accomodate(user)
