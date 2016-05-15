@@ -18,14 +18,10 @@ class GamesController < ApplicationController
     
     if @game.users.length > 1
       @game.create
-      @game.users.each do |user| 
-        @game.get_cards(user).each do |card|
-          puts "Card #{card.id}"
-        end 
-      end
+      #respond_to :js
     end
     if @game.save
-      redirect_to game_tables_index_path
+      redirect_to games_index_path
     else
       render 'new'
     end

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'game_tables/index'
 
-  get 'game/index'
+  get 'games/index'
 
   get 'games/newgame'
 
