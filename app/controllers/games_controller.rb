@@ -26,7 +26,8 @@ class GamesController < ApplicationController
   end
 
   def start
-    created = @game.create
+    @game = Game.find(9)
+    @game.initialize
   end
 
   def rules

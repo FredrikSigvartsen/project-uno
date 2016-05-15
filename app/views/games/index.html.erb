@@ -14,11 +14,13 @@
 			</div>
 			<div id="hand">
 			</div>
+
 		</div>
 	</div>
 	<div class="col-md-4">
 		<%# ERB.new("../messages/index.html.erb").result(binding) %>
-		<%#= render "messages/chat" %>
+		<%#= render "messages/chat" %>  
+		<%= button_to 'Start', { :controller => "games", :action => "start"} %>	
 	</div>
 </div>
 
@@ -27,6 +29,10 @@
 </script>
 
 <script type="text/javascript">
+
+function start(){
+	console.log("Start game");
+}
 
 var test_structure = document.getElementById("hand_template").innerHTML;
 
