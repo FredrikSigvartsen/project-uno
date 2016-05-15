@@ -12,20 +12,27 @@
 				<%= image_tag "utils/table.png", :id => "table" %>
 				<%= image_tag "utils/uno_button_2.png", :id => "uno_button" %>
 			</div>
+			<div id="hand">
+			</div>
+
 		</div>
 	</div>
 	<div class="col-md-4">
 		<%# ERB.new("../messages/index.html.erb").result(binding) %>
-		<%#= render "messages/chat" %>
+		<%#= render "messages/chat" %>  
+		<%= button_to 'Start', { :controller => "games", :action => "start"} %>	
 	</div>
 </div>
 
 <script id="hand_template" type="text/x-handlebars-template">
-	<div id="hand">
-	</div>
+	
 </script>
 
 <script type="text/javascript">
+
+function start(){
+	console.log("Start game");
+}
 
 var test_structure = document.getElementById("hand_template").innerHTML;
 

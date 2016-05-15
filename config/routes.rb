@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   get 'games/rules'
 
+  #post 'games/action'
+  post "games/start" => "games#start"
+
   root 'games#index'
 
   post 'login' => 'messages#login'

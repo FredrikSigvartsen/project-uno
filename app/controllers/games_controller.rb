@@ -16,6 +16,7 @@ class GamesController < ApplicationController
       @game.add_player(current_user)
     end
 
+
     if @game.save
       redirect_to games_index_path
     else
@@ -25,7 +26,8 @@ class GamesController < ApplicationController
   end
 
   def start
-    created = @game.create
+    @game = Game.find(9)
+    @game.initialize
   end
 
   def rules

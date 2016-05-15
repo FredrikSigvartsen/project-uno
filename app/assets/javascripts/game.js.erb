@@ -1,7 +1,25 @@
-;(function ($) {
+(function ($) { 
 
   var pusher = new Pusher('0d846fc26187e9741029');
   var channel = pusher.subscribe('game');
+
+  /*pusher.connection.bind('connected', function () {
+    var socket_id = pusher.connection.socket_id;
+
+    $('#socket_id').val(socket_id);
+  });*/
+
+  channel.bind('card_drawn', function (data) {
+    //$('#hand').append('<%= image_tag "cards/card_' + data.card_id + '.png", :id => "card" %>');
+    console.log("Answer from pusher: " + data.card_id);
+  });
+})(jQuery);
+
+/*
+;(function ($) {
+
+  var pusher = new Pusher('0d846fc26187e9741029');
+  var channel = pusher.subscribe('chat');
 
   pusher.connection.bind('connected', function () {
     var socket_id = pusher.connection.socket_id;
@@ -9,7 +27,14 @@
     $('#socket_id').val(socket_id);
   });
 
-  channel.bind('card_drawn', function (data) {
-    $('#hand').append('<%= image_tag "cards/card_' + data.card_id + '.png", :id => "card" %>');
+  channel.bind('new_message', function (data) {
+    $('.messages').append('<div style="clear: left;>'+'<p style="float: left;">'+ 
+      '<img src="'+data.avatar+'" alt="avatarMessage" width="13" height="13">'+
+      '<font color="black">' + '(' + data.timestamp +') '+ data.name + ': ' + 
+      '</font>' + data.message + '</p>'+ '</div>');
+      $('.messages').animate({ 
+        scrollTop: $('.messages')[0].scrollHeight}, 2000);
+  });
 }(jQuery));
 
+*/
