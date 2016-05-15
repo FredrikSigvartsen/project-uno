@@ -44,5 +44,3 @@ class GameTable < ActiveRecord::Base
     "Game: #{game_id}, Card: #{card_id}, Where is the card: #{place}"
   end
 end
-
-# Status
