@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   #post 'games/action'
   post "games/index" => "games#index"
 
-  root 'messages#index'
+  post "games/update" => "games#update"
+
+  root 'games#index'
 
   post 'login' => 'messages#login'
   get 'messages/welcome'

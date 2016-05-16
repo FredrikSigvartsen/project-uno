@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+
   def index
   end
 
@@ -15,6 +16,9 @@ class GamesController < ApplicationController
     elsif( @game.users.length == 1)
       @game.add_player(current_user)
     end
+
+    cookies[:userid] = current_user[:id] || -1
+    cookies[:gameid] = current_user[:game_id] || -1
 
     if @game.save
       redirect_to games_index_path
