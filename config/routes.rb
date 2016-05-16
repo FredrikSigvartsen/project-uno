@@ -11,10 +11,16 @@ Rails.application.routes.draw do
 
   get 'games/rules'
 
+  get 'lobby/update/:game_id' => "lobby#update", :as => :update_with_game_id
+
+  #match 'lobby/join_game/:game_id' => 'lobby#show', :as => :join_game
+
   #post 'games/action'
   post "games/index" => "games#index"
 
   post "games/update" => "games#update"
+
+  post "lobby/update/:game_id" => "lobby#update"
 
   root 'games#index'
 

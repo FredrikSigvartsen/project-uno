@@ -33,7 +33,7 @@
           <td><%= (game.host.nil? ? "User deleted" : game.host.username)%></td>
           <td><%= game.description %></td>
           <td><%= game.users.length %></td>
-          <td><%= button_to "Join game", :class =>"btn-default" %></td>
+          <td><%= button_to "Join game #{game.id}", :action => :update, :game_id => game.id %></td>
         </tr>
         <%end%>
     </table>
