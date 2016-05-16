@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
 
   def index
+    @game = Game.new
   end
 
   def newgame
@@ -8,14 +9,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.find(9) #Testing purposes
-    if( @game.users.length == 0)
-      @game.host_id = current_user[:id]
-      @game.description = game_params[:description]
-      @game.add_player(current_user)
-    elsif( @game.users.length == 1)
-      @game.add_player(current_user)
-    end
+    @game = Game.new #Testing purposes
+    @game.host_id = current_user[:id]
+    @game.description = game_params[:description]
+    @game.add_player(current_user)
 
     cookies[:userid] = current_user[:id] || -1
     cookies[:gameid] = current_user[:game_id] || -1
@@ -32,10 +29,14 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = Game.find(9)
-    @game = @game.start_game
-    if @game.save
+    @game = Game.find(params[:game_id])
+    if @game.start_game
+      if @game.save
+        redirect_to games_index_path
+      end
+    else
       redirect_to games_index_path
+      flash[:notice] = "Error. Failed to start game"
     end
   end
 

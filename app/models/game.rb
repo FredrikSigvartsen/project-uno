@@ -31,6 +31,7 @@ class Game < ActiveRecord::Base
     init_table_played_cards
     @active = save
     reload
+    true
   end
 
   def init_game_tables
