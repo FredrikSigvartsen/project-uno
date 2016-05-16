@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'games/index'
 
+  get 'games/create'
+
   get 'games/newgame'
 
   get 'games/rules'
@@ -26,11 +28,10 @@ Rails.application.routes.draw do
 
   post "lobby/update/:game_id" => "lobby#update"
 
-  root 'games#index'
+  root 'games#rules'
 
   post 'login' => 'messages#login'
-  get 'messages/welcome'  
-  
+  get 'messages/welcome'
   resources :messages, only: [:create]
   resources :games
   devise_for :users

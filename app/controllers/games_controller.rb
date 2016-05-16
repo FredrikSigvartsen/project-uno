@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def index
-    @game = Game.new
+    @game = Game.find(18)
   end
 
   def newgame
@@ -33,10 +33,11 @@ class GamesController < ApplicationController
     if @game.start_game
       if @game.save
         redirect_to games_index_path
+        flash[:notice] = "Wait for players to join."
       end
     else
       redirect_to games_index_path
-      flash[:notice] = "Error. Failed to start game"
+      flash[:notice] = "Error! You can't start a game with one player"
     end
   end
 
