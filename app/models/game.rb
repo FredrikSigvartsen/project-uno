@@ -256,6 +256,10 @@ class Game < ActiveRecord::Base
     (card.color.eql? "black") && (0..1).cover?(card.value)
   end
 
+  def host
+    User.find(host_id)
+  end
+
   def active?
     users.length < 1 && @active
   end

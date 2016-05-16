@@ -2,9 +2,12 @@ class LobbyController < ApplicationController
 
 	def new
 		@lobby = Lobby.new # Only create once when server starts
+		@games = Game.all
 	end
 
-	def index
+	def index		
+		@lobby = Lobby.new # Only create once when server starts
+		@games = Game.all
 	end
 
 	def create

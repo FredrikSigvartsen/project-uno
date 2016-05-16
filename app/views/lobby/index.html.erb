@@ -27,11 +27,22 @@
           <th>Join Game</th>
         </tr>
       </thead>
+      <% @games.each do |game| %>
+        <tr>
+          <td><%= game.id %></td>
+          <td><%= (game.host.nil? ? "User deleted" : game.host.username)%></td>
+          <td><%= game.description %></td>
+          <td><%= game.users.length %></td>
+          <td><%= button_to "Join game", :class =>"btn-default" %></td>
+        </tr>
+        <%end%>
     </table>
     <!--<button onclick="add()">Create Game</button>
     <button onclick="refresh()">Refresh</button>
     <button onclick="hide()">Hide</button>
-    <button onclick="show()">Show</button>-->
+    <button onclick="show()">Show</button>
+
+    -->
 
   </div> <!-- End of Class col-md-8 -->
 
