@@ -16,26 +16,28 @@
 	left: 7%;
 }
 
-#card{
-	width: 7%;
-	height: 7%;
+.card{
+	width: 8%;
+	height: 8%;
 	margin-top: 3%;
 	margin-left: 1%;
 	margin-right: 1%;
 }
 
-#card:hover{
+.card:hover{
 	width: 9%;
 	height: 9%;
 	margin-top: 0%;
-	margin-left: 0%;
+	margin-left: 1%;
 	margin-right: 0%;
 }
 
 #hand{
 	position: absolute;
-	top: 36000%;
-	left: 30%;
+	height: 900px;
+	width: 600px;
+	top: 37000%;
+	left: 25%;
 }
 
 #draw_card{
@@ -44,15 +46,17 @@
 	width: 7%;
 	right: 50%;
 	top: 700%;
-	/*margin-top: 1%;
-	margin-left: 0%;
-	margin-right: 0%;*/
 }
 
 #draw_card:hover{
 	width: 8%;
 	height: 350%;
-	/*margin-top: 0%;
-	margin-left: 0%;
-	margin-right: 0%;*/
+}
+
+#played_card{
+	position: absolute;
+	height: 330%;
+	width: 7%;
+	left: 53%;
+	top: 700%;
 }
