@@ -9,6 +9,7 @@
 			<div id="table">
 				<%= image_tag "utils/table.png", :id => "table" %>
 				<%= image_tag "utils/uno_button_2.png", :id => "uno_button" %>
+				<%= image_tag "cards/card_back.png", :id => "draw_card" %>
 			</div>
 			<div id="hand">
 			</div>
@@ -23,7 +24,7 @@
 </div>
 
 <script type="text/javascript">
-var userid = getCookie("userid");
+/*var userid = getCookie("userid");
 var gameid = getCookie("gameid");
 
 function getCookie(name) {
@@ -35,5 +36,5 @@ function cardPlayed(){
 	console.log("userid: " + userid);
 	console.log("gameid: " + gameid);
 	<%= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
-}
+}*/
 </script>

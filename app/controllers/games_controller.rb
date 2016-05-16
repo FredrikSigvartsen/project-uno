@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def index
-    @game = Game.find(18)
+    @game = Game.find(11)
   end
 
   def newgame

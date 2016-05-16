@@ -3,6 +3,9 @@
   var userid = getCookie("userid");
   var gameid = getCookie("gameid");
 
+  console.log("userid: " + userid);
+  console.log("gameid: " + gameid);
+
   function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");

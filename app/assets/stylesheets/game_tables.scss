@@ -37,3 +37,22 @@
 	top: 0%;
 	left: 0%;
 }
+
+#draw_card{
+	position: absolute;
+	height: 500%;
+	width: 10%;
+	right: 50%;
+	top: 700%;
+	/*margin-top: 1%;
+	margin-left: 0%;
+	margin-right: 0%;*/
+}
+
+#draw_card:hover{
+	width: 11%;
+	height: 520%;
+	/*margin-top: 0%;
+	margin-left: 0%;
+	margin-right: 0%;*/
+}
