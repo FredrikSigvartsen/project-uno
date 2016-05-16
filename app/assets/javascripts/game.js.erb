@@ -22,7 +22,7 @@
   });*/
 
   channel.bind('card_drawn_by_user_' + userid, function (data) {
-    $('#hand').append('<%= image_tag "cards/card_' + data.card_id + '.png", :id => "card" %>');
+    $('#hand').append('<%= image_tag "cards/card_' + data.card_id + '.png", :id => "card", :onClick => "cardPlayed()" %>');
     console.log("Answer from pusher: " + data.card_id);
   });
 })(jQuery);
