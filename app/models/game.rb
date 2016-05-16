@@ -16,21 +16,22 @@ class Game < ActiveRecord::Base
   attr_reader :current_color
   attr_reader :user_turn_queue
 
-  MAX_NUMBER_PLAYERS = 2
+  MAX_NUMBER_PLAYERS = 4
 
   def start_game
-    @active = false
-    @number_players = 0
-    @current_player = nil
-    @table = Array.new #Threat as stack
-    init_game_tables
-    @deck = init_deck #Threat as stack
-    @user_turn_queue = init_turn_queue
-    @current_player = next_in_line
-    deal_cards
-    init_table_played_cards
-    @active = save
-    reload
+      @number_players = 0
+      @current_player = nil
+      @table = Array.new #Threat as stack
+      init_game_tables
+      @deck = init_deck #Threat as stack
+      @user_turn_queue = init_turn_queue
+      @current_player = next_in_line
+      deal_cards
+      init_table_played_cards
+      @active = true
+      save
+      reload
+      return true
   end
 
   def init_game_tables
@@ -106,7 +107,9 @@ class Game < ActiveRecord::Base
       users << user
       save
       reload
-      user
+      return true 
+    elsif has_user?(user)
+      return true
     else
       false
     end
@@ -118,14 +121,11 @@ class Game < ActiveRecord::Base
 
   def remove_player(user)
     if !has_user?(user)
-      return user
-    elsif users.length == 2
-      end_game
-      return user
+      return true
     else
       users.delete(user)
       user.game_id = -1
-      return user
+      return true
     end
     false
   end
@@ -240,7 +240,7 @@ class Game < ActiveRecord::Base
     if(!(users.length <= MAX_NUMBER_PLAYERS))
       false
     end
-    !has_user?(user)
+    !has_user? user
   end
 
   def has_user? user
@@ -257,7 +257,7 @@ class Game < ActiveRecord::Base
   end
 
   def active?
-    users.length < 1 && @active
+    users.length > 1 && @active
   end
 
   def get_next_player
@@ -272,6 +272,10 @@ class Game < ActiveRecord::Base
     el = @user_turn_queue.pop
     @user_turn_queue.unshift(el)
     el
+  end
+
+  def host
+    User.find(host_id)
   end
 
   def set_current_card_and_color(card, color = card.color)

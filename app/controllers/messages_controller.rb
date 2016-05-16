@@ -2,11 +2,16 @@ class MessagesController < ApplicationController
 
   def index
     @message = Message.new
+    @chat = Chat.new
+    @game = Game.new
   end
 
   def create
     @message = Message.new(message_params)
+    @game = Game.new
     @message.save
+    @chat = Chat.new(:game_id => 100, :message_id => @message.id)
+    @chat.save
     if(@message.message != '')
       t = Time.now()
       username = current_user[:username]

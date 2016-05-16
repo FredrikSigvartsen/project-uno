@@ -31,6 +31,33 @@
 		<%#= render "messages/chat" %>  
 		<%#= button_to "Start game", :action => :update, :game_id => @game.id %>	
 		<button type="button" onclick="start()">Start game</button>
+		<div class="chat">
+      <div class="chat-title">
+        <h2>Chat</h2>
+        <figure class="avatar">
+          <% avatar = current_user[:avatar]%>
+          <% if (avatar == nil|| avatar == "") %>
+             <%avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"%>
+          <%end%>
+          <img src="<%= avatar%>"> 
+        </figure>
+      </div>
+      <div class="messages">
+        <div class="message-content"> 
+        </div>
+      </div>
+      <%= form_for @message, remote: true do |f| %>
+        <div class="message-box">
+          <div class="message-input"> 
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.text_area :message, rows: 2, cols: 30 %>
+          </div>
+        <div class="message-submit">
+          <%= f.submit 'Send' %>
+        </div>
+        </div>
+      <% end %>
+    </div> <!-- End of class chat -->
 	</div>
 </div>
 
@@ -100,6 +127,15 @@ if (parts.length == 2) return parts.pop().split(";").shift();
 function cardPlayed(){
 	console.log("userid: " + userid);
 	console.log("gameid: " + gameid);
-	<%= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
+<<<<<<< HEAD
+	<%#= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
+}
+  window.onbeforeunload = confirmExit;
+  function confirmExit()
+  {
+    
+  }
+=======
+	<%#= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
 }*/
 </script>
