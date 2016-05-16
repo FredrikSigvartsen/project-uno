@@ -1,7 +1,11 @@
 (function ($) { 
 
+
+  //console.log("User: " + document.userid);
+  //console.log("Game: " + document.gameid);
+
   var pusher = new Pusher('0d846fc26187e9741029');
-  var channel = pusher.subscribe('game');
+  var channel = pusher.subscribe('game_9');
 
   /*pusher.connection.bind('connected', function () {
     var socket_id = pusher.connection.socket_id;
@@ -9,8 +13,8 @@
     $('#socket_id').val(socket_id);
   });*/
 
-  channel.bind('card_drawn', function (data) {
-    $('#hand').append('<%= image_tag "cards/card_' + data.card_id + '.png", :id => "card" %>');
+  channel.bind('card_drawn_by_user_2', function (data) {
+    $('#hand').append("<%= image_tag 'cards/card_" + data.card_id + ".png', :id => "card" %>");
     console.log("Answer from pusher: " + data.card_id);
   });
 })(jQuery);

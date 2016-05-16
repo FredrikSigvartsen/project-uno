@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Uno - game</title>
-	<%= javascript_include_tag "application" %>
 </head>
 <body>
 <div class="row">
@@ -20,47 +19,13 @@
 	<div class="col-md-4">
 		<%# ERB.new("../messages/index.html.erb").result(binding) %>
 		<%#= render "messages/chat" %>  
-		<%= button_to 'Start', { :controller => "games", :action => "index"} %>	
+		<%= button_to 'Start', { :controller => "games", :action => "update"}, :remote => true %>	
 	</div>
 </div>
 
-<script id="hand_template" type="text/x-handlebars-template">
-	
-</script>
-
 <script type="text/javascript">
-
-var test_structure = document.getElementById("hand_template").innerHTML;
-
-var template = Handlebars.compile(test_structure);
-
-Handlebars.registerHelper("getCardImg", function(cardNo, id){
-	cardNo = Handlebars.Utils.escapeExpression(cardNo);
-	id = Handlebars.Utils.escapeExpression(id);
-	//var cardImage = "test";//'<img id="'+ id +'" src="../../public/images/cards/card_' + cardNo + '.png">';
-	var cardImage = '<td>image_tag("cards/card_' + cardNo + '.png")</td>'
-
-	return new Handlebars.SafeString(cardImage);
-
-	//{{#each cards}}
-	//{{getCardImg card id}}
-	//{{/each}}
-});
-
-var test_vars = template({
-	cards: [
-		{card: "001", id: "card"},
-		{card: "002", id: "card"},
-		{card: "003", id: "card"},
-		{card: "004", id: "card"},
-		{card: "005", id: "card"},
-		{card: "006", id: "card"},
-		{card: "007", id: "card"}
-	]
-});
-
-document.getElementById("table").innerHTML += test_vars;
-
+	currentUserId = <%= current_user.id %>
+	currentGameId = <%= current_user.game_id %>
 </script>
 
 </body>
