@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'messages/index'
 
+  get 'lobby/index'
+
   get 'game_tables/index'
 
   get 'games/index'
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   root 'messages#index'
 
   post 'login' => 'messages#login'
-  get 'messages/welcome'
+  get 'messages/welcome'  
   
   resources :messages, only: [:create]
   resources :games

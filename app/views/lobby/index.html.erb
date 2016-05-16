@@ -1,0 +1,39 @@
+<h1>Listing lobbies</h1>
+
+<script src="https://js.pusher.com/3.1/pusher.min.js"></script> 
+<script>
+    (function ($) 
+    {
+      var pusher = new Pusher('c3a61dff86b0de8dc8c7');
+      var channel = pusher.subscribe('lobby');
+
+      channel.bind('new_game', function(data) 
+      {
+        console.log(data);
+        $('#leadertable').append(('<tbody>') + + ('<tr>') + ('<td>') + data.gameid + ('</td>') + ('<td>') + data.host + ('</td>') + ('<td>') + data.desc + ('</td>') + ('<td>') + data.players + ('</td>') + ('<button type="button">') + 'Join Game' + ('</button>') + ('</tr>') +('</tbody>'));
+      });
+    }(jQuery));
+</script>
+
+<div class="row"> 
+  <div class="col-md-8">
+    <table class="table table-hover" id="leadertable">
+      <thead>
+        <tr>
+          <th>Game ID</th>
+          <th>Host</th>
+          <th>Description</th>
+          <th>Players</th>
+          <th>Join Game</th>
+        </tr>
+      </thead>
+    </table>
+    <!--<button onclick="add()">Create Game</button>
+    <button onclick="refresh()">Refresh</button>
+    <button onclick="hide()">Hide</button>
+    <button onclick="show()">Show</button>-->
+
+  </div> <!-- End of Class col-md-8 -->
+
+</table>
+</div> <!-- End of Class Row -->
