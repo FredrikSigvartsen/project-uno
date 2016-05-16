@@ -2,6 +2,7 @@ class GamesController < ApplicationController
 
   def index
     render @game 
+    @message = Message.new
   end
 
   def newgame
