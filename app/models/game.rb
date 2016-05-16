@@ -17,14 +17,12 @@ class Game < ActiveRecord::Base
   attr_reader :user_turn_queue
 
   MAX_NUMBER_PLAYERS = 2
-  def initialize
+
+  def start_game
     @active = false
     @number_players = 0
     @current_player = nil
     @table = Array.new #Threat as stack
-  end
-
-  def start_game
     init_game_tables
     @deck = init_deck #Threat as stack
     @user_turn_queue = init_turn_queue

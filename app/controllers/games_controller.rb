@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   def index
   end
 
-  def new
+  def newgame
     @game = Game.new
   end
 
