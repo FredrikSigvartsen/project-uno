@@ -1,6 +1,3 @@
-
-
-
 <script type="text/javascript">
 	currentUserId = <%= current_user.id %>
 	currentGameId = <%= current_user.game_id %>
@@ -12,8 +9,19 @@
 			<div id="table">
 				<%= image_tag "utils/table.png", :id => "table" %>
 				<%= image_tag "utils/uno_button_2.png", :id => "uno_button" %>
+				<%= image_tag "cards/card_back.png", :id => "draw_card" %>
+				<div id="discard">
+					<%= image_tag "cards/card_42.png", :ID => "played_card" %>
+				</div>
 			</div>
 			<div id="hand">
+				<%= image_tag "cards/card_98.png", :class => "card", :id => "98", :onClick => "card98Played()" %>
+				<%= image_tag "cards/card_67.png", :class => "card", :id => "67", :onClick => "card67Played()" %>
+				<%= image_tag "cards/card_34.png", :class => "card", :id => "34", :onClick => "card34Played()" %>
+				<%= image_tag "cards/card_107.png", :class => "card", :id => "107", :onClick => "card107Played()" %>
+				<%= image_tag "cards/card_78.png", :class => "card", :id => "78", :onClick => "card78Played()" %>
+				<%= image_tag "cards/card_12.png", :class => "card", :id => "12", :onClick => "card12Played()" %>
+				<%= image_tag "cards/card_54.png", :class => "card", :id => "54", :onClick => "card54Played()" %>
 			</div>
 
 		</div>
@@ -21,6 +29,113 @@
 	<div class="col-md-4">
 		<%# ERB.new("../messages/index.html.erb").result(binding) %>
 		<%#= render "messages/chat" %>  
-		<%= button_to "Start game", :action => :update, :game_id => 10 %>	
+		<%#= button_to "Start game", :action => :update, :game_id => @game.id %>	
+		<button type="button" onclick="start()">Start game</button>
+		<div class="chat">
+      <div class="chat-title">
+        <h2>Chat</h2>
+        <figure class="avatar">
+          <% avatar = current_user[:avatar]%>
+          <% if (avatar == nil|| avatar == "") %>
+             <%avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"%>
+          <%end%>
+          <img src="<%= avatar%>"> 
+        </figure>
+      </div>
+      <div class="messages">
+        <div class="message-content"> 
+        </div>
+      </div>
+      <%= form_for @message, remote: true do |f| %>
+        <div class="message-box">
+          <div class="message-input"> 
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.text_area :message, rows: 2, cols: 30 %>
+          </div>
+        <div class="message-submit">
+          <%= f.submit 'Send' %>
+        </div>
+        </div>
+      <% end %>
+    </div> <!-- End of class chat -->
 	</div>
 </div>
+
+<script type="text/javascript">
+$('#hand').hide();
+$('#played_card').hide();
+
+function start(){
+	$('#hand').show();
+	$('#played_card').show();
+}
+
+function card98Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_98.png", :id => "played_card" %>');
+	$(".card#98").remove();
+
+}
+
+function card67Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_67.png", :id => "played_card" %>');
+	$(".card#67").remove();
+}
+
+function card34Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_34.png", :id => "played_card" %>');
+	$(".card#34").remove();
+
+}
+
+function card107Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_107.png", :id => "played_card" %>');
+	$(".card#107").remove();
+
+}
+
+function card78Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_78.png", :id => "played_card" %>');
+	$(".card#78").remove();
+
+}
+
+function card12Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_12.png", :id => "played_card" %>');
+	$(".card#12").remove();
+
+}
+
+function card54Played(){
+	$("#played_card").remove();
+	$("#discard").append('<%= image_tag "cards/card_54.png", :id => "played_card" %>');
+	$(".card#54").remove();
+}
+/*var userid = getCookie("userid");
+var gameid = getCookie("gameid");
+
+function getCookie(name) {
+var value = "; " + document.cookie;
+var parts = value.split("; " + name + "=");
+if (parts.length == 2) return parts.pop().split(";").shift();
+}
+function cardPlayed(){
+	console.log("userid: " + userid);
+	console.log("gameid: " + gameid);
+<<<<<<< HEAD
+	<%#= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
+}
+  window.onbeforeunload = confirmExit;
+  function confirmExit()
+  {
+    
+  }
+=======
+	<%#= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
+}*/
+</script>
