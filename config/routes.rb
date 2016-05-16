@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   post "lobby/update/:game_id" => "lobby#update"
 
+  post "game/update/:game_id/:card_id/:user_id" => "game#update"
+
   root 'games#index'
 
   post 'login' => 'messages#login'
