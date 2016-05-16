@@ -274,6 +274,10 @@ class Game < ActiveRecord::Base
     el
   end
 
+  def host
+    User.find(host_id)
+  end
+
   def set_current_card_and_color(card, color = card.color)
     @current_card = card
     @current_color = color

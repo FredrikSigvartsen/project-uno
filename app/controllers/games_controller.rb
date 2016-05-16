@@ -36,7 +36,7 @@ class GamesController < ApplicationController
     if current_user[:id] == @game.host_id
       if @game.start_game
         if @game.save
-          respond_to :js
+          redirect_to games_index_path
 
           #respond_to do |format|
           #format.html { redirect_to games_index_path }
