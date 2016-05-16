@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
-  
+
   def index
+    @game = Game.new
   end
 
   def newgame
@@ -8,11 +9,34 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params, params[current_user[:id]])
+    @game = Game.new #Testing purposes
+    @game.host_id = current_user[:id]
+    @game.description = game_params[:description]
+    @game.add_player(current_user)
+
+    cookies[:userid] = current_user[:id] || -1
+    cookies[:gameid] = current_user[:game_id] || -1
+
     if @game.save
-      redirect_to messages_index_path
-    #else
-    #  render 'new'
+      redirect_to games_index_path
+      user = User.find(@game.host_id)
+      Pusher.trigger("lobby", "new_game",
+        {game_id: @game.id}, description: @game.description, host: user.username, number_of_players: @game.users.length)
+    else
+      render 'new'
+    end
+    flash[:notice] = "There are #{@game.users.length} users in game #{@game.id}"
+  end
+
+  def update
+    @game = Game.find(params[:game_id])
+    if @game.start_game
+      if @game.save
+        redirect_to games_index_path
+      end
+    else
+      redirect_to games_index_path
+      flash[:notice] = "Error. Failed to start game"
     end
   end
 
@@ -21,8 +45,3 @@ class GamesController < ApplicationController
       params.require(:game).permit(:description)
     end
 end
-# Unchecked - Create a game correctly with host_id and description
-# Unchecked - After creating a game, also initialize it on the model
-# Unchecked - Let users join games, and host to remove users. 
-# Unchecked - Let a player play or draw a card
-# Unchecked - Let host wait for users to start game

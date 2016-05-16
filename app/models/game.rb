@@ -18,23 +18,35 @@ class Game < ActiveRecord::Base
 
   MAX_NUMBER_PLAYERS = 4
 
-  def create
+  def start_game
+    @active = false
     @number_players = 0
     @current_player = nil
-    host = User.find(host_id)
-    users << host
-    @deck = init_deck #Threat as stack
     @table = Array.new #Threat as stack
+    init_game_tables
+    @deck = init_deck #Threat as stack
     @user_turn_queue = init_turn_queue
     @current_player = next_in_line
     deal_cards
     init_table_played_cards
-    save
+    @active = save
     reload
+    true
+  end
+
+  def init_game_tables
+    cards = Card.all
+    cards.each do |card|
+      gamecard = GameTable.new
+      gamecard.game_id = id
+      gamecard.card_id = card.id
+      gamecard.assign_to_deck
+      game_tables << gamecard
+    end
   end
 
   def init_deck
-    new_deck = Card.all
+    new_deck = Array.new
     game_tables.each do |gamecard|
       card = Card.find(gamecard.card_id)
       new_deck.push(card)
@@ -49,7 +61,9 @@ class Game < ActiveRecord::Base
   def deal_cards
     users.each do |user|
       (0..6).each do |i|   #TODO: Find a way to test with the database
-        deck_pop_and_assign_to(user)
+        card = deck_pop_and_assign_to(user)
+        Pusher.trigger("game_#{id}", "card_drawn_by_user_#{user.id}",
+                       { card_id: card.id, user_id: user.id })
       end
     end
     save
@@ -123,8 +137,13 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def draw_one_card
-    deck_pop_and_assign_to(@current_player)
+  def draw_card(user)
+    if ! user.eql? @current_player
+      return false
+    end
+    card = deck_pop_and_assign_to(user)
+    Pusher.trigger("game_#{id}", "card_drawn_by_user_#{user.id}",
+                   { card_id: card.id, user_id: user.id })
   end
 
   def play_card(card, user, next_color = "")
@@ -161,6 +180,8 @@ class Game < ActiveRecord::Base
     @table << card
     gamecard = GameTable.find_by card_id: card.id
     gamecard.assign_to_played_card
+    Pusher.trigger("game_#{id}", "card_played_by_user_#{user.id}",
+                   { card_id: card.id, user_id: user.id })
     save
     reload
     true
@@ -190,6 +211,7 @@ class Game < ActiveRecord::Base
     card = @deck.pop
     gamecard = GameTable.find_by card_id: card.id
     gamecard.assign_to_user(user.id)
+    card
   end
 
   def validate_card(card)
@@ -203,6 +225,16 @@ class Game < ActiveRecord::Base
       return true
     end
     false
+  end
+
+  def get_cards(user)
+    all_cards = Array.new
+    game_tables.each do |gamecard|
+      if gamecard.user_id.eql? user.id
+        all_cards << Card.find(gamecard.card_id)
+      end
+    end
+    all_cards
   end
 
   def can_accomodate(user)
@@ -223,6 +255,14 @@ class Game < ActiveRecord::Base
 
   def wild_card?(card)
     (card.color.eql? "black") && (0..1).cover?(card.value)
+  end
+
+  def host
+    User.find(host_id)
+  end
+
+  def active?
+    users.length < 1 && @active
   end
 
   def get_next_player

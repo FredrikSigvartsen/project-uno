@@ -1,18 +1,35 @@
 Rails.application.routes.draw do
   get 'messages/index'
 
+  get 'lobby/index'
+
   get 'game_tables/index'
 
-  get 'game/index'
+  get 'games/index'
 
   get 'games/newgame'
 
   get 'games/rules'
 
+  get 'games/update/:game_id' => "games#update", :as => :update_game
+
+  get 'lobby/update/:game_id' => "lobby#update", :as => :update_with_game_id
+
+  #match 'lobby/join_game/:game_id' => 'lobby#show', :as => :join_game
+
+  #post 'games/action'
+  get "games/update/:game_id" => "games#update"
+
+  post "games/index" => "games#index"
+
+  post "games/update/:game_id" => "games#update"
+
+  post "lobby/update/:game_id" => "lobby#update"
+
   root 'games#index'
 
   post 'login' => 'messages#login'
-  get 'messages/welcome'
+  get 'messages/welcome'  
   
   resources :messages, only: [:create]
   resources :games
