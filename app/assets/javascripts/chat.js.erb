@@ -14,7 +14,7 @@
       '<img src="'+data.avatar+'" alt="avatarMessage" width="13" height="13">'+
       '<font color="black">' + '(' + data.timestamp +') '+ data.name + ': ' + 
       '</font>' + data.message + '</p>'+ '</div>');
-      $('.messages').animate({ 
+      $('.messages').animate(                                                                                 { 
         scrollTop: $('.messages')[0].scrollHeight}, 2000);
   });
 }(jQuery));

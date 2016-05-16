@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  match '/serve_image/:filename' => 'images#serve', via: :get
+
   get 'messages/index'
 
   get 'lobby/index'

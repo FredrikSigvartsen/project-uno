@@ -10,7 +10,7 @@
       channel.bind('new_game', function(data) 
       {
         console.log(data);
-        $('#leadertable').append(('<tbody>') + + ('<tr>') + ('<td>') + data.gameid + ('</td>') + ('<td>') + data.host + ('</td>') + ('<td>') + data.desc + ('</td>') + ('<td>') + data.players + ('</td>') + ('<button type="button">') + 'Join Game' + ('</button>') + ('</tr>') +('</tbody>'));
+        $('#leadertable').append(('<tbody>') + + ('<tr>') + ('<td>') + data.game_id + ('</td>') + ('<td>') + data.host + ('</td>') + ('<td>') + data.description + ('</td>') + ('<td>') + data.number_of_players + ('</td>') + ('<td>') + ('<%= button_to "join", action: "join" %>')+ ('</td>')+ ('</tr>') +('</tbody>'));
       });
     }(jQuery));
 </script>

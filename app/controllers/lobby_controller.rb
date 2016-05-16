@@ -14,7 +14,7 @@ class LobbyController < ApplicationController
 	def update
 		#Check if the game is in session or not
 		#Pusher.trigger('lobby', 'someaction')
-		
+			
 
 		#Check if the game is in session or not
 		# Server sends information back to 
@@ -29,6 +29,9 @@ class LobbyController < ApplicationController
   #});
 	#})(jQuery);
 
+	end
+
+	def join
 	end
 
 	def show
