@@ -8,9 +8,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params, params[current_user[:id]])
+    
+    @game = Game.new(game_params)
     if @game.save
-      redirect_to messages_index_path
+      redirect_to game_tables_index_path
     #else
     #  render 'new'
     end
@@ -18,7 +19,7 @@ class GamesController < ApplicationController
 
   private
     def game_params
-      params.require(:game).permit(:description)
+      params.require(:game).permit(:host_id,:description)
     end
 end
 # Unchecked - Create a game correctly with host_id and description

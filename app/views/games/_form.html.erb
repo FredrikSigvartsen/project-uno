@@ -1,4 +1,5 @@
 <%= simple_form_for @game do |f| %>
 	<%= f.input :description %>
+	<%= f.hidden_field :host_id, :value => current_user.id %>
 	<%= f.button :submit %>
 <% end %>

@@ -15,7 +15,6 @@
 	</div>
 
 </div>
-
 <script id="hand_template" type="text/x-handlebars-template">
 	<div id="hand">
 		<table>
@@ -58,6 +57,34 @@ var test_vars = template({
 document.getElementById("table").innerHTML += test_vars;
 
 </script>
-
+<div class="col-md-4">
+    <div class="chat">
+      <div class="chat-title">
+        <h2>Chat</h2>
+        <figure class="avatar">
+          <% avatar = current_user[:avatar]%>
+          <% if (avatar == nil|| avatar == "") %>
+             <%avatar = "http://www.emoticonswallpapers.com/avatar/penguins/penguin%20pingouin%20pinguino%2045.png"%>
+          <%end%>
+          <img src="<%= avatar%>"> 
+        </figure>
+      </div>
+      <div class="messages">
+        <div class="message-content"> 
+        </div>
+      </div>
+      <%= form_for @message, remote: true do |f| %>
+        <div class="message-box">
+          <div class="message-input"> 
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.text_area :message, rows: 2, cols: 30 %>
+          </div>
+        <div class="message-submit">
+          <%= f.submit 'Send' %>
+        </div>
+        </div>
+      <% end %>
+    </div> <!-- End of class chat -->
+</div> <!-- End of class .col-md-4 -->
 </body>
 </html>
