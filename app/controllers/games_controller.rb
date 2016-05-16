@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def index
-    @game = Game.find(18)
+    render @game 
   end
 
   def newgame
@@ -12,7 +12,8 @@ class GamesController < ApplicationController
     @game = Game.new #Testing purposes
     @game.host_id = current_user[:id]
     @game.description = game_params[:description]
-    @game.add_player(current_user)
+    host = User.find(@game.host_id)
+    @game.add_player(host)
 
     cookies[:userid] = current_user[:id] || -1
     cookies[:gameid] = current_user[:game_id] || -1
@@ -25,19 +26,30 @@ class GamesController < ApplicationController
     else
       render 'new'
     end
-    flash[:notice] = "There are #{@game.users.length} users in game #{@game.id}"
+    flash[:notice] = "#{host.username}, please wait for other players to join"
   end
 
   def update
     @game = Game.find(params[:game_id])
-    if @game.start_game
-      if @game.save
+    cookies[:userid] = current_user[:id] || -1
+    cookies[:gameid] = current_user[:game_id] || -1
+    if current_user[:id] == @game.host_id
+      if @game.start_game
+        if @game.save
+          respond_to :js
+
+          #respond_to do |format|
+          #format.html { redirect_to games_index_path }
+          #format.js { head :ok }
+          #end
+        end
+      else
         redirect_to games_index_path
-        flash[:notice] = "Wait for players to join."
+        flash[:notice] = "Error! You can't start a game with one player"
       end
     else
+      flash[:notice] = "Hosts only can start games"
       redirect_to games_index_path
-      flash[:notice] = "Error! You can't start a game with one player"
     end
   end
 

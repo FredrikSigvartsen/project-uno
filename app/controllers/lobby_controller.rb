@@ -11,9 +11,12 @@ class LobbyController < ApplicationController
 	end
 
 	def update
+
 		game = Game.find(params[:game_id])
+    cookies[:userid] = current_user[:id] || -1
+    cookies[:gameid] = current_user[:game_id] || -1
 		if !game.nil? 
-			if ! game.add_player(current_user)
+			if !game.add_player(current_user)
 				redirect_to lobby_index_path
 				flash[:notice] = "This game is full"
 			else
