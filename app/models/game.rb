@@ -62,8 +62,8 @@ class Game < ActiveRecord::Base
     users.each do |user|
       (0..6).each do |i|   #TODO: Find a way to test with the database
         card = deck_pop_and_assign_to(user)
-        Pusher.trigger("game_#{id}", "card_drawn_by_user_#{user.id}",
-                       { card_id: card.id, user_id: user.id })
+        Pusher.trigger("game_#{id}", "card_drawn_by_user_#{user.id}", # image-path(card_#{card.id}.png)
+                       { card_id: card.id, user_id: user.id }) #<img src='cards/card_#{card.id}.png'/> # '<%= image_tag "card_#{card.id}.png" %>'
       end
     end
     save
@@ -81,7 +81,7 @@ class Game < ActiveRecord::Base
     set_current_card_and_color(@table.last)
     gamecard = GameTable.find_by card_id: card.id
     gamecard.assign_to_played_card
-    save
+     save
     reload
   end
 
@@ -254,10 +254,6 @@ class Game < ActiveRecord::Base
 
   def wild_card?(card)
     (card.color.eql? "black") && (0..1).cover?(card.value)
-  end
-
-  def host
-    User.find(host_id)
   end
 
   def active?

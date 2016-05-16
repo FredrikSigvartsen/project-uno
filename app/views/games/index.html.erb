@@ -9,8 +9,16 @@
 			<div id="table">
 				<%= image_tag "utils/table.png", :id => "table" %>
 				<%= image_tag "utils/uno_button_2.png", :id => "uno_button" %>
+				<%= image_tag "cards/card_back.png", :id => "draw_card" %>
 			</div>
 			<div id="hand">
+				<%= image_tag "cards/card_007.png", :id => "card" %>
+				<%= image_tag "cards/card_067.png", :id => "card" %>
+				<%= image_tag "cards/card_034.png", :id => "card" %>
+				<%= image_tag "cards/card_107.png", :id => "card" %>
+				<%= image_tag "cards/card_078.png", :id => "card" %>
+				<%= image_tag "cards/card_012.png", :id => "card" %>
+				<%= image_tag "cards/card_054.png", :id => "card" %>
 			</div>
 
 		</div>
@@ -23,7 +31,8 @@
 </div>
 
 <script type="text/javascript">
-var userid = getCookie("userid");
+
+/*var userid = getCookie("userid");
 var gameid = getCookie("gameid");
 
 function getCookie(name) {
@@ -34,6 +43,7 @@ if (parts.length == 2) return parts.pop().split(";").shift();
 function cardPlayed(){
 	console.log("userid: " + userid);
 	console.log("gameid: " + gameid);
+<<<<<<< HEAD
 	<%#= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
 }
   window.onbeforeunload = confirmExit;
@@ -41,4 +51,7 @@ function cardPlayed(){
   {
     
   }
+=======
+	<%#= link_to(:action => :update, :game_id => 'gameid', :card_id => 'userid', :user_id => 'userid')%>
+}*/
 </script>
