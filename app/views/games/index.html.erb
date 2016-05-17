@@ -15,13 +15,13 @@
 				</div>
 			</div>
 			<div id="hand">
-				<%= image_tag "cards/card_98.png", :class => "card", :id => "98", :onClick => "card98Played()" %>
-				<%= image_tag "cards/card_67.png", :class => "card", :id => "67", :onClick => "card67Played()" %>
-				<%= image_tag "cards/card_34.png", :class => "card", :id => "34", :onClick => "card34Played()" %>
-				<%= image_tag "cards/card_107.png", :class => "card", :id => "107", :onClick => "card107Played()" %>
-				<%= image_tag "cards/card_78.png", :class => "card", :id => "78", :onClick => "card78Played()" %>
-				<%= image_tag "cards/card_12.png", :class => "card", :id => "12", :onClick => "card12Played()" %>
-				<%= image_tag "cards/card_54.png", :class => "card", :id => "54", :onClick => "card54Played()" %>
+				<%= image_tag "cards/card_98.png", :class => "card", :id => "98", :onClick => "cardPlayed(98)" %>
+				<%= image_tag "cards/card_67.png", :class => "card", :id => "67", :onClick => "cardPlayed(67)" %>
+				<%= image_tag "cards/card_34.png", :class => "card", :id => "34", :onClick => "cardPlayed(34)" %>
+				<%= image_tag "cards/card_107.png", :class => "card", :id => "107", :onClick => "cardPlayed(107)" %>
+				<%= image_tag "cards/card_78.png", :class => "card", :id => "78", :onClick => "cardPlayed(78)" %>
+				<%= image_tag "cards/card_12.png", :class => "card", :id => "12", :onClick => "cardPlayed(12)" %>
+				<%= image_tag "cards/card_54.png", :class => "card", :id => "54", :onClick => "cardPlayed(54)" %>
 			</div>
 
 		</div>
@@ -70,51 +70,11 @@ function start(){
 	$('#played_card').show();
 }
 
-function card98Played(){
+function cardPlayed(id){
 	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_98.png", :id => "played_card" %>');
-	$(".card#98").remove();
+	$("#discard").append('<%= image_tag "cards/card_' + id +'.png", :id => "played_card" %>');
+	$(".card#" + id).remove();
 
-}
-
-function card67Played(){
-	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_67.png", :id => "played_card" %>');
-	$(".card#67").remove();
-}
-
-function card34Played(){
-	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_34.png", :id => "played_card" %>');
-	$(".card#34").remove();
-
-}
-
-function card107Played(){
-	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_107.png", :id => "played_card" %>');
-	$(".card#107").remove();
-
-}
-
-function card78Played(){
-	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_78.png", :id => "played_card" %>');
-	$(".card#78").remove();
-
-}
-
-function card12Played(){
-	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_12.png", :id => "played_card" %>');
-	$(".card#12").remove();
-
-}
-
-function card54Played(){
-	$("#played_card").remove();
-	$("#discard").append('<%= image_tag "cards/card_54.png", :id => "played_card" %>');
-	$(".card#54").remove();
 }
 /*var userid = getCookie("userid");
 var gameid = getCookie("gameid");
